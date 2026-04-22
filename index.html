@@ -3,221 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protocolo Boss Curiosidades | Estratégia & IA</title>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <title>Boss Curiosidades | A Nova Nobreza Empresarial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --black: #0a0a0a;
-            --orange: #ff6a00;
-            --gold: #d4af37;
-            --silver: #e0e0e0;
+            --black: #050505;
+            --deep-grey: #121212;
+            --orange: #FF6A00;
+            --gold: #D4AF37;
+            --silver: #C0C0C0;
+            --text-main: #E0E0E0;
             --glass: rgba(255, 255, 255, 0.03);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; }
 
         body {
             background-color: var(--black);
-            color: var(--silver);
-            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
-            line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
-        /* Efeito de Gradiente Dinâmico ao Fundo */
-        .bg-glow {
+        /* Background Dinâmico Atmosférico */
+        .bg-mesh {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 106, 0, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle at 10% 20%, rgba(255, 106, 0, 0.05) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
             z-index: -1;
-            pointer-events: none;
         }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 100px 20px; text-align: center; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 25px; }
 
-        /* Typography Premium */
+        /* Hero Section */
+        header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+
         .badge {
-            color: var(--gold);
+            font-size: 11px;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 12px;
-            font-weight: 700;
+            color: var(--gold);
             margin-bottom: 20px;
-            display: block;
+            border: 1px solid var(--gold);
+            padding: 8px 15px;
+            border-radius: 50px;
+            animation: fadeIn 2s ease;
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            color: #fff;
-            margin-bottom: 30px;
+            font-size: clamp(2.2rem, 8vw, 4.5rem);
             line-height: 1.1;
+            margin-bottom: 30px;
+            color: #fff;
         }
 
         h1 span {
-            background: linear-gradient(90deg, var(--gold), var(--orange));
+            background: linear-gradient(to right, var(--silver), var(--gold), var(--orange));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-style: italic;
         }
 
-        p.lead {
-            font-size: 1.2rem;
-            color: #888;
-            max-width: 600px;
-            margin: 0 auto 50px;
+        /* Conteúdo Narrativo */
+        .copy-section { padding: 100px 0; max-width: 800px; margin: 0 auto; }
+
+        .copy-section p {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #A0A0A0;
+            margin-bottom: 40px;
+            font-weight: 200;
         }
 
-        /* Glassmorphism Card do Formulário */
-        .form-card {
+        .highlight-card {
             background: var(--glass);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 50px;
-            text-align: left;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-left: 3px solid var(--orange);
+            padding: 40px;
+            margin: 60px 0;
+            backdrop-filter: blur(15px);
+            border-radius: 0 20px 20px 0;
+        }
+
+        h2 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2rem; margin-bottom: 25px; }
+
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 60px; }
+
+        .feature-item { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .feature-item strong { color: #fff; display: block; margin-bottom: 10px; font-size: 1.1rem; }
+        .feature-item span { color: #888; font-size: 0.95rem; }
+
+        /* Formulário de Seleção Premium */
+        .form-container {
+            background: linear-gradient(145deg, #0f0f0f 0%, #050505 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 30px;
+            padding: 60px;
+            margin-bottom: 100px;
             position: relative;
-            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
         }
 
-        .form-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--orange), transparent);
+        .form-container::after {
+            content: ''; position: absolute; top: -1px; right: -1px; bottom: -1px; left: -1px;
+            border-radius: 30px; background: linear-gradient(45deg, transparent, rgba(255, 106, 0, 0.1), transparent);
+            z-index: -1;
         }
 
-        .input-group { margin-bottom: 30px; }
+        .input-box { margin-bottom: 35px; position: relative; }
 
-        label {
-            display: block;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--gold);
-            margin-bottom: 10px;
-            font-weight: 700;
+        .input-box label {
+            display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 3px;
+            color: var(--gold); margin-bottom: 12px; font-weight: 700;
         }
 
-        input, textarea {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.02);
-            border: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 15px 0;
-            color: #fff;
-            font-size: 1rem;
-            transition: 0.3s;
-            outline: none;
+        .input-box input, .input-box textarea {
+            width: 100%; background: transparent; border: none; border-bottom: 1px solid #333;
+            padding: 12px 0; color: #fff; font-size: 1.1rem; font-family: inherit; transition: 0.4s;
+            outline: none; cursor: text;
         }
 
-        input:focus, textarea:focus {
-            border-bottom-color: var(--orange);
-            background: rgba(255, 106, 0, 0.02);
+        .input-box input:focus, .input-box textarea:focus { border-bottom-color: var(--orange); }
+
+        .sub-label { display: block; font-size: 12px; color: #555; margin-top: 8px; font-style: italic; }
+
+        /* Botão Magnético */
+        .btn-wrap { text-align: center; margin-top: 50px; }
+
+        .btn-main {
+            background: linear-gradient(90deg, #D4AF37, #FF6A00);
+            padding: 22px 60px; border: none; border-radius: 50px;
+            color: #fff; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 3px; font-size: 13px; cursor: pointer;
+            box-shadow: 0 15px 30px rgba(255, 106, 0, 0.2);
+            transition: 0.5s;
         }
 
-        /* Botão Dopaminérgico */
-        .btn-submit {
-            width: 100%;
-            background: #fff;
-            color: #000;
-            padding: 20px;
-            border: none;
-            border-radius: 12px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-top: 20px;
-        }
+        .btn-main:hover { transform: scale(1.05); box-shadow: 0 20px 50px rgba(255, 106, 0, 0.4); }
 
-        .btn-submit:hover {
-            background: var(--orange);
-            color: #fff;
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(255, 106, 0, 0.3);
-        }
+        /* Footer Estilizado */
+        footer { padding-bottom: 50px; text-align: center; border-top: 1px solid #111; padding-top: 50px; }
+        .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #fff; margin-bottom: 10px; }
+        .footer-logo span { color: var(--gold); }
 
-        footer {
-            margin-top: 100px;
-            font-size: 10px;
-            color: #444;
-            letter-spacing: 2px;
-        }
-
-        /* Efeitos de Animação */
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1s all ease; }
+        /* Animações */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
         .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        @media (max-width: 768px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .form-container { padding: 30px; }
+            h1 { font-size: 2.8rem; }
+        }
     </style>
 </head>
 <body>
 
-<div class="bg-glow"></div>
+<div class="bg-mesh"></div>
 
 <div class="container">
-    <span class="badge reveal">Private Access Only</span>
-    <h1 class="reveal">Arquitete sua <span>Liberdade.</span></h1>
-    <p class="lead reveal">A aplicação para líderes que buscam dissociar o crescimento da operação manual em 2026.</p>
+    <header>
+        <span class="badge">Acesso Exclusivo 2026</span>
+        <h1 class="reveal">A Nova Nobreza Empresarial:<br><span>O Tempo é o Maior Ativo</span></h1>
+        <div class="btn-wrap reveal">
+            <a href="#form" style="text-decoration: none;"><button class="btn-main">Falar com o Estrategista</button></a>
+        </div>
+    </header>
 
-    <div class="form-card reveal">
-        <form action="https://docs.google.com/forms/d/e/1FAIpQLScyB-H5eR1D9FmO-J_Yp-mC1Xm_F8oX_I1E8X_I1E8X_I1E8Q/formResponse" method="POST" id="bootstrapForm">
+    <section class="copy-section">
+        <p class="reveal">O cenário atual não perdoa o esforço sem direção. No coração de cada negócio que prospera em 2026, existe um segredo que vai além do talento: a capacidade de não ser escravo da própria operação.</p>
+        
+        <p class="reveal">O empreendedor moderno compreende que sua genialidade deve ser aplicada na <strong>estratégia</strong>, e não no desgaste de tarefas repetitivas que drenam sua vitalidade.</p>
+
+        <div class="highlight-card reveal">
+            <h2>A elegância da simplicidade nos seus processos</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <strong>Liberdade de Execução</strong>
+                    <span>Devolver a você o direito de focar no que é essencial e humano.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Sustentabilidade Operacional</strong>
+                    <span>Crescimento sem abrir mão da sua qualidade de vida.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Segurança e Fluidez</strong>
+                    <span>Tecnologia silenciosa para uma entrega impecável e musculatura de gigante.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Transição Necessária</strong>
+                    <span>Vantagem estratégica óbvia ao utilizar inteligência sistêmica.</span>
+                </div>
+            </div>
+        </div>
+
+        <p class="reveal">Implementar inteligência nos seus processos é o que diferencia o <strong>dono de um negócio</strong> de um operador de funções. A maior sofisticação que você pode oferecer à sua empresa é a capacidade de ser eficiente sem ser exaustivo.</p>
+
+        <h2 class="reveal" style="text-align: center; margin-top: 80px;">Um Encontro de Estrategistas</h2>
+        <p class="reveal" style="text-align: center;">Não se trata de contratar um serviço, mas de estabelecer um networking que elevará o patamar da sua estrutura.</p>
+    </section>
+
+    <div class="form-container reveal" id="form">
+        <h2 style="margin-bottom: 10px;">Aplicação Estratégica</h2>
+        <p style="font-size: 0.9rem; color: #666; margin-bottom: 40px;">Preencha os critérios abaixo para análise de compatibilidade.</p>
+        
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLScyB-H5eR1D9FmO-J_Yp-mC1Xm_F8oX_I1E8X_I1E8X_I1E8Q/formResponse" method="POST">
             
-            <div class="input-group">
-                <label>01. Identidade do Titular</label>
+            <div class="input-box">
+                <label>Qual seu nome?</label>
                 <input type="text" name="entry.678677076" placeholder="Seu nome completo" required>
             </div>
 
-            <div class="input-group">
-                <label>02. Linha Direta (WhatsApp)</label>
-                <input type="text" name="entry.1554549533" placeholder="+55 (00) 0 0000-0000" required>
+            <div class="input-box">
+                <label>Qual é o número de WhatsApp?</label>
+                <input type="text" name="entry.1554549533" placeholder="+55 00 00000-0000" required>
             </div>
 
-            <div class="input-group">
-                <label>03. Correio Eletrônico Institucional</label>
+            <div class="input-box">
+                <label>Coloque seu melhor e-mail:</label>
                 <input type="email" name="entry.948827469" placeholder="exemplo@empresa.com" required>
             </div>
 
-            <div class="input-group">
-                <label>04. Vetor de Autoridade (Social)</label>
-                <input type="text" name="entry.436339199" placeholder="Link LinkedIn ou Instagram" required>
+            <div class="input-box">
+                <label>Rede Social do Negócio</label>
+                <input type="text" name="entry.436339199" placeholder="Link do LinkedIn ou Instagram" required>
+                <span class="sub-label">Para análise prévia de posicionamento.</span>
             </div>
 
-            <div class="input-group">
-                <label>05. Visão e Ambição de Mercado</label>
-                <textarea name="entry.1427730301" rows="3" placeholder="Qual seu principal objetivo agora?" required></textarea>
+            <div class="input-box">
+                <label>Qual seu principal objetivo ou ambição agora?</label>
+                <textarea name="entry.1427730301" rows="2" placeholder="Descreva suas metas atuais..." required></textarea>
+                <span class="sub-label">O que você busca alcançar ao otimizar sua operação?</span>
             </div>
 
-            <div class="input-group">
-                <label>06. Justificativa de Momento (Timing)</label>
-                <textarea name="entry.687557737" rows="3" placeholder="Por que este é o momento de escalar?" required></textarea>
+            <div class="input-box">
+                <label>Por que este é o momento certo para escalarmos sua estrutura?</label>
+                <textarea name="entry.687557737" rows="2" placeholder="Sua visão sobre o timing atual..." required></textarea>
+                <span class="sub-label">Buscamos empreendedores prontos para o próximo nível.</span>
             </div>
 
-            <button type="submit" class="btn-submit">Solicitar Diagnóstico Estratégico</button>
+            <div class="btn-wrap">
+                <button type="submit" class="btn-main">Enviar Aplicação para o Estrategista</button>
+            </div>
         </form>
     </div>
 
     <footer>
-        BOSS CURIOSIDADES © 2026 | ESTRATÉGIA & INTELIGÊNCIA OPERACIONAL
+        <div class="footer-logo">BOSS <span>CURIOSIDADES</span></div>
+        <p style="font-size: 10px; color: #333; letter-spacing: 2px; text-transform: uppercase;">
+            Mecanismos de Alto Padrão | © 2026 Porto Alegre, Brasil.
+        </p>
     </footer>
 </div>
 
 <script>
-    // Animação de Entrada (Scroll Reveal)
+    // Reveal Animation on Scroll
     function reveal() {
         var reveals = document.querySelectorAll(".reveal");
         for (var i = 0; i < reveals.length; i++) {
             var windowHeight = window.innerHeight;
             var elementTop = reveals[i].getBoundingClientRect().top;
-            var elementVisible = 150;
+            var elementVisible = 100;
             if (elementTop < windowHeight - elementVisible) {
                 reveals[i].classList.add("active");
             }
         }
     }
     window.addEventListener("scroll", reveal);
-    window.onload = reveal;
+    reveal(); // Iniciar no load
 </script>
 
 </body>
