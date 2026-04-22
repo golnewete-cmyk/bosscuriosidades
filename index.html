@@ -4,27 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protocolo Boss | Engenharia de Liberdade</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700;900&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --deep-black: #020202;
             --pure-black: #000000;
             --electric-orange: #FF4D00;
-            --burn-orange: #CC3E00;
             --gold-leaf: #C5A059;
-            --slate-silver: #A8A8A8;
+            --silver: #E0E0E0;
             --text-high: #FFFFFF;
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.12);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; }
 
         body {
             background-color: var(--deep-black);
-            color: var(--slate-silver);
+            color: var(--silver);
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
+            line-height: 1.6;
         }
 
         /* Atmosfera Cinematográfica */
@@ -32,9 +32,179 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 0% 0%, rgba(255, 77, 0, 0.03) 0%, transparent 35%),
-                radial-gradient(circle at 100% 100%, rgba(197, 160, 89, 0.03) 0%, transparent 35%);
+                radial-gradient(circle at 5% 5%, rgba(255, 77, 0, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 95% 95%, rgba(197, 160, 89, 0.04) 0%, transparent 40%);
             z-index: -1;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 30px; }
+
+        /* Header Soberano */
+        header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+
+        .kicker {
+            font-size: 12px; letter-spacing: 6px; text-transform: uppercase;
+            color: var(--electric-orange); font-weight: 900; margin-bottom: 20px;
+            border-left: 3px solid var(--electric-orange); padding-left: 15px;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 7vw, 4rem);
+            line-height: 1.1; margin-bottom: 30px; color: var(--text-high); font-weight: 700;
+        }
+
+        h1 span {
+            display: block;
+            background: linear-gradient(90deg, #FFF 0%, var(--gold-leaf) 50%, var(--electric-orange) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* Copy Section */
+        .content { padding: 100px 0; }
+        .paragraph { font-size: 1.35rem; color: var(--text-high); margin-bottom: 40px; font-weight: 300; }
+        
+        .pillar-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1px; background: var(--glass-border); margin: 60px 0; border: 1px solid var(--glass-border);
+        }
+
+        .pillar { background: var(--pure-black); padding: 40px; }
+        .pillar h3 { color: var(--electric-orange); font-size: 11px; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; }
+        .pillar p { font-size: 0.95rem; color: #999; }
+
+        /* Form Estilo "Dark Executive" */
+        .form-wrap {
+            background: #000; padding: 60px; border: 1px solid var(--glass-border);
+            position: relative; margin-top: 50px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.9);
+        }
+
+        .form-wrap::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(var(--electric-orange), var(--gold-leaf));
+        }
+
+        .field { margin-bottom: 45px; }
+
+        /* Melhoria na Legibilidade */
+        .field label {
+            display: block; font-size: 13px; font-weight: 900; color: #FFF;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
+        }
+
+        .field input, .field textarea {
+            width: 100%; background: rgba(255,255,255,0.02); border: none;
+            border-bottom: 2px solid #222; padding: 15px 10px; color: #fff;
+            font-size: 1.1rem; outline: none; transition: 0.4s;
+        }
+
+        .field input:focus, .field textarea:focus {
+            background: rgba(255, 77, 0, 0.03); border-bottom-color: var(--electric-orange);
+        }
+
+        .hint { font-size: 12px; color: var(--gold-leaf); margin-top: 8px; font-weight: 500; display: block; }
+
+        /* CTA */
+        .btn-boss {
+            background: #FFF; color: #000; padding: 25px 60px; border: none;
+            font-size: 13px; font-weight: 900; text-transform: uppercase;
+            letter-spacing: 4px; cursor: pointer; transition: 0.4s ease;
+        }
+
+        .btn-boss:hover { background: var(--electric-orange); color: #FFF; transform: translateX(10px); }
+
+        footer { padding: 80px 0 40px; text-align: center; border-top: 1px solid #111; font-size: 10px; letter-spacing: 4px; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) { .form-wrap { padding: 30px 15px; } h1 { font-size: 2.5rem; } }
+    </style>
+</head>
+<body>
+
+<div class="bg-overlay"></div>
+
+<div class="container">
+    <header>
+        <span class="kicker reveal">A Nova Nobreza Empresarial</span>
+        <h1 class="reveal">Onde o Tempo é o<br><span>Maior Ativo.</span></h1>
+        <p class="paragraph reveal" style="max-size: 1.1rem; color: #888;">Protocolo exclusivo para líderes que buscam a transição definitiva para a inteligência sistêmica.</p>
+    </header>
+
+    <main class="content">
+        <p class="paragraph reveal">O cenário atual não perdoa o esforço sem direção. O empreendedor moderno compreende que sua genialidade deve ser aplicada na <strong>estratégia</strong>, e não no desgaste de tarefas repetitivas.</p>
+
+        <div class="pillar-grid reveal">
+            <div class="pillar"><h3>Sustentabilidade</h3><p>Estruturas que crescem sem exigir que você abra mão da sua qualidade de vida.</p></div>
+            <div class="pillar"><h3>Segurança</h3><p>Tecnologia silenciosa nos bastidores para que sua entrega seja impecável.</p></div>
+            <div class="pillar"><h3>Fluidez</h3><p>Processos integrados que devolvem a você o direito de focar no essencial.</p></div>
+        </div>
+
+        <div class="form-wrap reveal" id="form">
+            <h2 style="font-family: 'Cinzel'; color: #fff; font-size: 1.8rem; margin-bottom: 40px;">Diagnóstico Estratégico</h2>
+            
+            <form action="https://docs.google.com/forms/d/e/1FAIpQLSe79keCIYkL7hmtyzNdzFUFHGEG_K9loHBrjW2sNSm2_r7yQA/formResponse" method="POST">
+                
+                <div class="field reveal">
+                    <label>Qual seu nome?</label>
+                    <input type="text" name="entry.678677076" placeholder="Seu nome completo" required>
+                </div>
+
+                <div class="field reveal">
+                    <label>Qual é o número de WhatsApp?</label>
+                    <input type="text" name="entry.1554549533" placeholder="+55 00 00000-0000" required>
+                </div>
+
+                <div class="field reveal">
+                    <label>Coloque seu melhor e-mail:</label>
+                    <input type="email" name="entry.948827469" placeholder="email@dominio.com" required>
+                </div>
+
+                <div class="field reveal">
+                    <label>Rede Social do Negócio (LinkedIn ou Instagram)</label>
+                    <input type="text" name="entry.436339199" placeholder="Link do perfil" required>
+                    <span class="hint">Para análise prévia de posicionamento.</span>
+                </div>
+
+                <div class="field reveal">
+                    <label>Qual seu principal objetivo ou ambição agora?</label>
+                    <textarea name="entry.1427730301" rows="2" placeholder="O que busca alcançar otimizando a operação?" required></textarea>
+                </div>
+
+                <div class="field reveal">
+                    <label>Por que acredita ser este o momento de escalar?</label>
+                    <textarea name="entry.687557737" rows="2" placeholder="Buscamos empreendedores prontos para o próximo nível." required></textarea>
+                </div>
+
+                <div class="reveal">
+                    <button type="submit" class="btn-boss">Solicitar Diagnóstico</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div style="font-family: 'Cinzel'; font-size: 1.2rem; color: #FFF; margin-bottom: 10px;">BOSS CURIOSIDADES</div>
+        <div style="color: #444;">PORTO ALEGRE | ESTRATÉGIA & IA © 2026</div>
+    </footer>
+</div>
+
+<script>
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
+        }
+    }
+    window.addEventListener("scroll", reveal);
+    reveal();
+</script>
+
+</body>
+</html>            z-index: -1;
         }
 
         .container { max-width: 1000px; margin: 0 auto; padding: 0 30px; }
