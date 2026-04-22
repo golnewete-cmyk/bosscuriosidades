@@ -3,38 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOSS | Protocolo de Soberania Operacional</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <title>Boss Curiosidades | Diagnóstico Estratégico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #000000;
+            --bg: #050505;
             --orange: #FF4D00;
-            --orange-glow: rgba(255, 77, 0, 0.15);
-            --gold: #C5A059;
-            --silver: #F2F2F2;
-            --glass: rgba(255, 255, 255, 0.02);
-            --border: rgba(255, 255, 255, 0.08);
+            --gold: #D4AF37;
+            --silver: #E0E0E0;
+            --white: #FFFFFF;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background-color: var(--bg);
+            background: radial-gradient(circle at top right, #111, var(--bg));
             color: var(--silver);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.8;
             overflow-x: hidden;
-            letter-spacing: -0.02em;
         }
 
-        /* Background com Efeito de Malha e Profundidade */
-        .viewport-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 50% -20%, #1a1a1a 0%, transparent 50%),
-                radial-gradient(circle at 0% 100%, var(--orange-glow) 0%, transparent 30%);
-            z-index: -1;
+        .container { max-width: 900px; margin: 0 auto; padding: 0 30px; }
+
+        /* Hero & Typography */
+        header { padding: 120px 0 60px; text-align: center; }
+        
+        .badge {
+            color: var(--orange);
+            font-size: 12px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-bottom: 20px;
+            display: block;
         }
 
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.2rem, 8vw, 4rem);
+            line-height: 1.1;
+            color: var(--white);
+            margin-bottom: 40px;
+        }
+
+        h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.8rem; margin: 60px 0 30px; }
+
+        .copy-text { font-size: 1.25rem; font-weight: 300; margin-bottom: 30px; color: var(--silver); }
+        .copy-text strong { color: var(--white); font-weight: 700; }
+
+        /* Grid de Benefícios */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .benefit-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 30px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .benefit-card strong { color: var(--orange); display: block; margin-bottom: 10px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Formulário Premium */
+        .form-section {
+            background: #000;
+            border: 1px solid var(--gold);
+            padding: 60px;
+            margin: 100px 0;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .form-header { text-align: center; margin-bottom: 50px; }
+        .form-header h3 { font-family: 'Cinzel'; font-size: 2rem; color: var(--white); }
+        .form-header .highlight { color: var(--orange); font-weight: 900; letter-spacing: 2px; }
+
+        .field { margin-bottom: 40px; }
+        
+        /* Legibilidade Máxima nas Perguntas */
+        .field label {
+            display: block;
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--orange);
+            padding-left: 10px;
+        }
+
+        .field input, .field textarea {
+            width: 100%;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            padding: 15px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-family: 'Montserrat';
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .field input:focus, .field textarea:focus { border-color: var(--orange); background: #111; }
+
+        .hint { font-size: 12px; color: var(--gold); margin-top: 8px; font-weight: 500; }
+
+        /* Botão Final */
+        .btn-main {
+            width: 100%;
+            background: var(--white);
+            color: #000;
+            padding: 25px;
+            border: none;
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .btn-main:hover { background: var(--orange); color: #fff; transform: translateY(-3px); }
+
+        /* Tela de Sucesso */
+        #success { display: none; text-align: center; padding: 100px 0; }
+        #success h2 { font-size: 3rem; color: var(--gold); }
+
+        footer { padding: 60px 0; text-align: center; opacity: 0.4; font-size: 10px; letter-spacing: 3px; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Privado & Exclusivo</span>
+        <h1 class="reveal">A Nova Nobreza Empresarial:<br><span>O Tempo é o Maior Ativo</span></h1>
+    </header>
+
+    <main>
+        <div class="copy-text reveal">
+            O cenário atual não perdoa o esforço sem direção. No coração de cada negócio que prospera em 2026, existe um segredo que vai além do talento: <strong>a capacidade de não ser escravo da própria operação.</strong>
+        </div>
+
+        <div class="copy-text reveal">
+            O empreendedor moderno compreende que sua genialidade deve ser aplicada na estratégia, e não no desgaste de tarefas repetitivas que drenam sua vitalidade.
+        </div>
+
+        <h2 class="reveal">A elegância da simplicidade nos seus processos:</h2>
+
+        <div class="benefits-grid">
+            <div class="benefit-card reveal">
+                <strong>Liberdade de Execução</strong>
+                Integrar automações em processos simples e cotidianos não é sobre tecnologia, é sobre devolver a você o direito de focar no que é essencial e humano.
+            </div>
+            <div class="benefit-card reveal">
+                <strong>Sustentabilidade Operacional</strong>
+                Pequenos ajustes e fluxos inteligentes criam uma estrutura que cresce sem exigir que você abra mão da sua qualidade de vida.
+            </div>
+            <div class="benefit-card reveal">
+                <strong>Segurança e Fluidez</strong>
+                A tecnologia moderna é acessível e silenciosa. Ela trabalha nos bastidores para que sua entrega seja impecável e seu negócio ganhe a musculatura de um gigante.
+            </div>
+            <div class="benefit-card reveal">
+                <strong>A Transição Necessária</strong>
+                O mercado está se dividindo entre os que se sobrecarregam e os que utilizam a inteligência sistêmica a seu favor. Estar do lado certo dessa mudança é uma vantagem estratégica óbvia.
+            </div>
+        </div>
+
+        <div class="copy-text reveal">
+            <strong>O Valor do Capital Intelectual</strong><br>
+            Implementar inteligência nos seus processos é o que diferencia o dono de um negócio de um operador de funções. Em um mundo cada vez mais acelerado, a maior sofisticação que você pode oferecer à sua empresa é a capacidade de ser eficiente sem ser exaustivo.
+        </div>
+
+        <h2 class="reveal">Um Encontro de Estrategistas</h2>
+        
+        <div class="copy-text reveal">
+            Soluções genéricas ignoram a alma do seu projeto. Eu acredito que o verdadeiro progresso nasce de uma troca de alto nível, onde compreendo suas ambições para que possamos desenhar um caminho sob medida.
+        </div>
+
+        <div class="copy-text reveal">
+            Não se trata de contratar um serviço, mas de estabelecer um networking que elevará o patamar da sua estrutura. A sua visão merece um mecanismo que a suporte com precisão.
+        </div>
+
+        <div class="copy-text reveal" style="text-align: center; margin: 80px 0;">
+            Convido você para um diálogo exclusivo. Vamos alinhar suas metas e descobrir, juntos, como a tecnologia pode ser a sua maior aliada nessa nova jornada.
+        </div>
+
+        <div id="form-wrap" class="form-section reveal">
+            <div class="form-header">
+                <span class="highlight">DIAGNÓSTICO ESTRATÉGICO GRATUITO</span>
+                <h3>Aplicação para Networking</h3>
+            </div>
+
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){showSuccess();}"></iframe>
+
+            <form action="https://docs.google.com/forms/d/e/1FAIpQLSe79keCIYkL7hmtyzNdzFUFHGEG_K9loHBrjW2sNSm2_r7yQA/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+                
+                <div class="field">
+                    <label>Qual seu nome?</label>
+                    <input type="text" name="entry.678677076" placeholder="Nome completo" required>
+                </div>
+
+                <div class="field">
+                    <label>Qual é o número de WhatsApp?</label>
+                    <input type="text" name="entry.1554549533" placeholder="+55 (00) 0 0000-0000" required>
+                </div>
+
+                <div class="field">
+                    <label>Coloque seu melhor e-mail:</label>
+                    <input type="email" name="entry.948827469" placeholder="contato@exemplo.com" required>
+                </div>
+
+                <div class="field">
+                    <label>Rede Social do Negócio (LinkedIn ou Instagram)</label>
+                    <input type="text" name="entry.436339199" placeholder="Link do perfil" required>
+                    <span class="hint">Para análise prévia de posicionamento.</span>
+                </div>
+
+                <div class="field">
+                    <label>Qual seu principal objetivo ou ambição agora?</label>
+                    <textarea name="entry.1427730301" rows="2" placeholder="O que você busca alcançar?" required></textarea>
+                </div>
+
+                <div class="field">
+                    <label>Por que este é o momento certo para escalar sua estrutura?</label>
+                    <textarea name="entry.687557737" rows="2" placeholder="Sua visão sobre o momento atual" required></textarea>
+                </div>
+
+                <button type="submit" class="btn-main">Falar com o Estrategista</button>
+            </form>
+        </div>
+
+        <div id="success">
+            <h2>Mensagem Enviada.</h2>
+            <p>O estrategista analisará sua estrutura pessoalmente. Aguarde.</p>
+        </div>
+    </main>
+
+    <footer>BOSS CURIOSIDADES | ESTRATÉGIA & INTELIGÊNCIA | 2026</footer>
+</div>
+
+<script>
+    var submitted = false;
+    function showSuccess() {
+        document.getElementById('form-wrap').style.display = 'none';
+        document.getElementById('success').style.display = 'block';
+        window.scrollTo(0, document.getElementById('success').offsetTop - 100);
+    }
+
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
+        }
+    }
+    window.addEventListener("scroll", reveal);
+    reveal();
+</script>
+
+</body>
+</html>
         .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
 
         /* Header Cinematográfico */
