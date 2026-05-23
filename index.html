@@ -1,272 +1,547 @@
+# Landing Page — Boss Curiosidades | Diagnóstico Estratégico
+
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boss Curiosidades | Diagnóstico Estratégico</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --bg: #050505;
             --orange: #FF4D00;
             --gold: #D4AF37;
-            --silver: #E0E0E0;
+            --silver: #CFCFCF;
             --white: #FFFFFF;
+            --card: rgba(255,255,255,0.03);
+            --border: rgba(255,255,255,0.08);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: var(--bg);
-            background: radial-gradient(circle at top right, #111, var(--bg));
+            background:
+                radial-gradient(circle at top right, rgba(255,77,0,0.08), transparent 30%),
+                radial-gradient(circle at bottom left, rgba(212,175,55,0.04), transparent 30%),
+                var(--bg);
             color: var(--silver);
             font-family: 'Montserrat', sans-serif;
-            line-height: 1.8;
             overflow-x: hidden;
+            line-height: 1.8;
         }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 0 30px; }
+        .noise {
+            position: fixed;
+            inset: 0;
+            background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 999;
+        }
 
-        header { padding: 120px 0 60px; text-align: center; }
-        
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
         .badge {
             color: var(--orange);
             font-size: 12px;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             text-transform: uppercase;
             font-weight: 900;
             margin-bottom: 20px;
-            display: block;
+            display: inline-block;
         }
 
         h1 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(2.2rem, 8vw, 4rem);
-            line-height: 1.1;
+            font-size: clamp(2.6rem, 7vw, 5.6rem);
+            line-height: 1.05;
             color: var(--white);
-            margin-bottom: 40px;
+            font-weight: 900;
+            margin-bottom: 28px;
         }
 
-        h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.8rem; margin: 60px 0 30px; }
+        h2 {
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            line-height: 1.15;
+            color: var(--white);
+            font-weight: 900;
+            margin-bottom: 28px;
+        }
 
-        .copy-text { font-size: 1.25rem; font-weight: 300; margin-bottom: 30px; color: var(--silver); }
-        .copy-text strong { color: var(--white); font-weight: 700; }
+        h3 {
+            font-size: 1.2rem;
+            color: var(--orange);
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
 
-        .benefits-grid {
+        p {
+            font-size: 1.05rem;
+            color: var(--silver);
+            margin-bottom: 18px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,77,0,0.18), transparent 70%);
+            top: -150px;
+            right: -150px;
+            filter: blur(40px);
+        }
+
+        .hero-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 50px 0;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
         }
 
-        .benefit-card {
+        .highlight {
+            color: var(--orange);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 760px;
+        }
+
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--orange), #ff6f32);
+            color: var(--white);
+            padding: 18px 34px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 800;
+            margin-top: 25px;
+            transition: 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 0 30px rgba(255,77,0,0.2);
+        }
+
+        .cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 45px rgba(255,77,0,0.35);
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            padding: 40px;
+            backdrop-filter: blur(16px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+            pointer-events: none;
+        }
+
+        .list {
+            margin-top: 30px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .list div {
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 16px 18px;
+            border-radius: 16px;
+            transition: 0.3s ease;
+        }
+
+        .list div:hover {
+            transform: translateX(6px);
+            border-color: rgba(255,77,0,0.3);
+        }
+
+        .quote {
+            margin-top: 35px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--white);
+            border-left: 3px solid var(--orange);
+            padding-left: 20px;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .form-box {
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.08);
-            padding: 30px;
-            border-radius: 4px;
-            transition: 0.3s;
+            border-radius: 28px;
+            padding: 40px;
+            margin-top: 60px;
+            backdrop-filter: blur(14px);
         }
 
-        .benefit-card strong { color: var(--orange); display: block; margin-bottom: 10px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Estilo do Formulário */
-        .form-section {
-            background: #000;
-            border: 1px solid var(--gold);
-            padding: 60px;
-            margin: 100px 0;
-            position: relative;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        form {
+            display: grid;
+            gap: 18px;
+            margin-top: 30px;
         }
 
-        .form-header { text-align: center; margin-bottom: 50px; }
-        .form-header h3 { font-family: 'Cinzel'; font-size: 2rem; color: var(--white); }
-        .form-header .highlight { color: var(--orange); font-weight: 900; letter-spacing: 2px; display: block; margin-bottom: 10px; }
-
-        .field { margin-bottom: 40px; }
-        
-        .field label {
-            display: block;
-            font-size: 14px;
-            font-weight: 900;
+        input,
+        textarea,
+        select {
+            width: 100%;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 18px;
             color: var(--white);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            border-left: 3px solid var(--orange);
-            padding-left: 10px;
-        }
-
-        .field input, .field textarea {
-            width: 100%;
-            background: #0a0a0a;
-            border: 1px solid #222;
-            padding: 15px;
-            color: #fff;
-            font-size: 1.1rem;
-            font-family: 'Montserrat';
-            transition: 0.3s;
+            font-size: 1rem;
             outline: none;
+            transition: 0.3s ease;
         }
 
-        .field input:focus, .field textarea:focus { border-color: var(--orange); background: #111; }
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: rgba(255,77,0,0.5);
+            box-shadow: 0 0 20px rgba(255,77,0,0.15);
+        }
 
-        .btn-main {
-            width: 100%;
-            background: var(--white);
-            color: #000;
-            padding: 25px;
+        button {
+            background: linear-gradient(135deg, var(--orange), #ff6f32);
             border: none;
-            font-size: 14px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 4px;
+            color: var(--white);
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 18px;
+            border-radius: 16px;
             cursor: pointer;
-            transition: 0.4s;
+            transition: 0.3s ease;
+            margin-top: 10px;
         }
 
-        .btn-main:hover { background: var(--orange); color: #fff; }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 35px rgba(255,77,0,0.25);
+        }
 
-        #success { display: none; text-align: center; padding: 100px 0; }
-        #success h2 { font-family: 'Cinzel'; font-size: 3rem; color: var(--gold); }
+        footer {
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
 
-        footer { padding: 60px 0; text-align: center; opacity: 0.4; font-size: 10px; letter-spacing: 3px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            margin: 40px 0;
+        }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        @media(max-width: 900px) {
+            .hero-grid,
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 70px 0;
+            }
+
+            .hero {
+                padding-top: 100px;
+            }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <span class="badge">Privado & Exclusivo</span>
-        <h1 class="reveal">A Nova Nobreza Empresarial:<br><span>O Tempo é o Maior Ativo</span></h1>
-    </header>
+<div class="noise"></div>
 
-    <main>
-        <div class="copy-text reveal">
-            O cenário atual não perdoa o esforço sem direção. No coração de cada negócio que prospera em 2026, existe um segredo que vai além do talento: <strong>a capacidade de não ser escravo da própria operação.</strong>
-        </div>
+<section class="hero">
+    <div class="container hero-grid">
 
-        <div class="copy-text reveal">
-            O empreendedor moderno compreende que sua genialidade deve ser aplicada na estratégia, e não no desgaste de tarefas repetitivas que drenam sua vitalidade.
-        </div>
+        <div>
+            <span class="badge">Diagnóstico Estratégico</span>
 
-        <h2 class="reveal">A elegância da simplicidade nos seus processos:</h2>
+            <h1>
+                O problema não é apenas vender.<br>
+                <span class="highlight">É sobreviver a um mercado que esmaga margens.</span>
+            </h1>
 
-        <div class="benefits-grid">
-            <div class="benefit-card reveal">
-                <strong>Liberdade de Execução</strong>
-                Integrar automações em processos simples e cotidianos não é sobre tecnologia, é sobre devolver a você o direito de focar no que é essencial e humano.
-            </div>
-            <div class="benefit-card reveal">
-                <strong>Sustentabilidade Operacional</strong>
-                Pequenos ajustes e fluxos inteligentes criam uma estrutura que cresce sem exigir que você abra mão da sua qualidade de vida.
-            </div>
-            <div class="benefit-card reveal">
-                <strong>Segurança e Fluidez</strong>
-                A tecnologia moderna é acessível e silenciosa. Ela trabalha nos bastidores para que sua entrega seja impecável e seu negócio ganhe a musculatura de um gigante.
-            </div>
-            <div class="benefit-card reveal">
-                <strong>A Transição Necessária</strong>
-                O mercado está se dividindo entre os que se sobrecarregam e os que utilizam a inteligência sistêmica a seu favor. Estar do lado certo dessa mudança é uma vantagem estratégica óbvia.
-            </div>
-        </div>
+            <p>
+                Enquanto impostos aumentam, custos sobem, burocracias crescem e grandes estruturas ficam cada vez mais pesadas...
+            </p>
 
-        <div class="copy-text reveal">
-            <strong>O Valor do Capital Intelectual</strong><br>
-            Implementar inteligência nos seus processos é o que diferencia o dono de um negócio de um operador de funções. Em um mundo cada vez mais acelerado, a maior sofisticação que você pode oferecer à sua empresa é a capacidade de ser eficiente sem ser exaustivo.
-        </div>
+            <p>
+                pequenos negócios continuam sendo forçados a operar com processos lentos, equipes sobrecarregadas, ferramentas caras e operações que dependem totalmente do dono.
+            </p>
 
-        <h2 class="reveal">Um Encontro de Estrategistas</h2>
-        
-        <div class="copy-text reveal">
-            Soluções genéricas ignoram a alma do seu projeto. Eu acredito que o verdadeiro progresso nasce de uma troca de alto nível, onde compreendo suas ambições para que possamos desenhar um caminho sob medida.
-        </div>
-
-        <div class="copy-text reveal">
-            Não se trata de contratar um serviço, mas de estabelecer um networking que elevará o patamar da sua estrutura. A sua visão merece um mecanismo que a suporte com precisão.
-        </div>
-
-        <div class="copy-text reveal" style="text-align: center; margin: 80px 0;">
-            Convido você para um diálogo exclusivo. Vamos alinhar suas metas e descobrir, juntos, como a tecnologia pode ser a sua maior aliada nessa nova jornada.
-        </div>
-
-        <div id="form-wrap" class="form-section reveal">
-            <div class="form-header">
-                <span class="highlight">DIAGNÓSTICO ESTRATÉGICO GRATUITO</span>
-                <h3>Aplicação para Networking</h3>
+            <div class="quote">
+                O mercado vende crescimento.<br>
+                Mas quase ninguém fala sobre preservar margem.
             </div>
 
-            <iframe name="vazio" id="vazio" style="display:none;" onload="if(submitted){showSuccess();}"></iframe>
-
-            <form action="https://docs.google.com/forms/d/e/1FAIpQLSe79keCIYkL7hmtyzNdzFUFHGEG_K9loHBrjW2sNSm2_r7yQA/formResponse" 
-                  method="POST" 
-                  target="vazio" 
-                  onsubmit="submitted=true;">
-                
-                <div class="field">
-                    <label>Qual seu nome?</label>
-                    <input type="text" name="entry.678677076" placeholder="Nome completo" required>
-                </div>
-
-                <div class="field">
-                    <label>Qual é o número de WhatsApp?</label>
-                    <input type="text" name="entry.1554549533" placeholder="+55 (00) 0 0000-0000" required>
-                </div>
-
-                <div class="field">
-                    <label>Coloque seu melhor e-mail:</label>
-                    <input type="email" name="entry.948827469" placeholder="contato@exemplo.com" required>
-                </div>
-
-                <div class="field">
-                    <label>Rede Social do Negócio (LinkedIn ou Instagram)</label>
-                    <input type="text" name="entry.436339199" placeholder="Link do perfil" required>
-                </div>
-
-                <div class="field">
-                    <label>Qual seu principal objetivo ou ambição agora?</label>
-                    <textarea name="entry.1427730301" rows="2" placeholder="O que você busca alcançar?" required></textarea>
-                </div>
-
-                <div class="field">
-                    <label>Por que este é o momento certo para escalar sua estrutura?</label>
-                    <textarea name="entry.687557737" rows="2" placeholder="Sua visão sobre o momento atual" required></textarea>
-                </div>
-
-                <button type="submit" class="btn-main">Falar com o Estrategista</button>
-            </form>
+            <a href="#diagnostico" class="cta">
+                RECEBER DIAGNÓSTICO GRATUITO
+            </a>
         </div>
 
-        <div id="success">
-            <h2>Transmissão Concluída.</h2>
-            <p style="margin-top: 20px; color: var(--gold); letter-spacing: 2px;">O estrategista analisará sua estrutura pessoalmente. Aguarde.</p>
-        </div>
-    </main>
+        <div class="card">
+            <h3>Hoje, contratar mais já não resolve.</h3>
 
-    <footer>BOSS CURIOSIDADES | ESTRATÉGIA & INTELIGÊNCIA | 2026</footer>
-</div>
+            <div class="list">
+                <div>Mais pessoas.</div>
+                <div>Mais sistemas.</div>
+                <div>Mais mensalidades.</div>
+                <div>Mais burocracia.</div>
+                <div>Mais complexidade.</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <p>
+                Empresas inteligentes estão fazendo o contrário:
+            </p>
+
+            <div class="list">
+                <div>Operações mais enxutas.</div>
+                <div>Menos desperdício.</div>
+                <div>Mais velocidade.</div>
+                <div>Mais organização.</div>
+                <div>Mais adaptação.</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="container section-grid">
+
+        <div class="card">
+            <span class="badge">Novo cenário</span>
+
+            <h2>
+                Empresas eficientes estão substituindo empresas pesadas.
+            </h2>
+
+            <p>
+                Enquanto muitos negócios continuam tentando resolver desorganização contratando mais pessoas...
+            </p>
+
+            <p>
+                outros estão simplificando operações, reduzindo atrito, eliminando desperdícios e automatizando tarefas repetitivas.
+            </p>
+
+            <div class="quote">
+                Empresas lentas estão pagando mais caro para crescer menos.
+            </div>
+        </div>
+
+        <div class="card">
+            <span class="badge">Problema do mercado</span>
+
+            <h2>
+                O mercado complicou aquilo que deveria simplificar.
+            </h2>
+
+            <div class="list">
+                <div>Sistemas gigantes.</div>
+                <div>Implementações demoradas.</div>
+                <div>Contratos longos.</div>
+                <div>Ferramentas caras.</div>
+                <div>Dependência técnica.</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <p>
+                Muitas empresas acabam pagando por complexidade que nem precisavam ter.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="container section-grid">
+
+        <div class="card">
+            <span class="badge">Estrutura Inteligente</span>
+
+            <h2>
+                Operações modernas não precisam ser gigantes.
+            </h2>
+
+            <p>
+                A lógica mudou.
+            </p>
+
+            <p>
+                Não vence quem possui a estrutura mais pesada.
+            </p>
+
+            <p>
+                Vence quem se adapta mais rápido, reduz atrito operacional e mantém margem mesmo em mercados pressionados.
+            </p>
+        </div>
+
+        <div class="card">
+            <span class="badge">Vivência real</span>
+
+            <h2>
+                A maioria fala sobre tecnologia.<br>
+                Poucos entendem a realidade operacional do mercado.
+            </h2>
+
+            <p>
+                Quem vive o mercado sabe onde empresas travam, onde dinheiro é desperdiçado e onde processos começam a sufocar crescimento.
+            </p>
+
+            <div class="quote">
+                Os maiores gargalos normalmente não estão na venda.<br>
+                Estão na operação invisível do dia a dia.
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="diagnostico">
+    <div class="container">
+
+        <div class="card">
+            <span class="badge">Diagnóstico Operacional</span>
+
+            <h2>
+                Crescer sem eficiência virou risco.
+            </h2>
+
+            <p>
+                Receba uma análise estratégica para identificar gargalos invisíveis, desperdícios operacionais e pontos que podem estar reduzindo sua margem sem perceber.
+            </p>
+
+            <div class="form-box">
+
+                <h3>Solicitar diagnóstico gratuito</h3>
+
+                <form action="https://docs.google.com/forms/d/e/SEU_FORM_ID/formResponse" method="POST" target="hidden_iframe">
+
+                    <input type="text" name="entry.1111111111" placeholder="Seu nome" required>
+
+                    <input type="text" name="entry.2222222222" placeholder="Empresa ou projeto" required>
+
+                    <input type="email" name="entry.3333333333" placeholder="Seu melhor e-mail" required>
+
+                    <input type="text" name="entry.4444444444" placeholder="WhatsApp" required>
+
+                    <select name="entry.5555555555" required>
+                        <option value="">Qual sua maior dificuldade hoje?</option>
+                        <option>Processos lentos</option>
+                        <option>Perda de clientes</option>
+                        <option>Falta de organização</option>
+                        <option>Excesso de tarefas manuais</option>
+                        <option>Equipe sobrecarregada</option>
+                        <option>Custos operacionais altos</option>
+                    </select>
+
+                    <textarea name="entry.6666666666" rows="5" placeholder="Descreva brevemente sua operação ou principal gargalo"></textarea>
+
+                    <button type="submit">
+                        RECEBER DIAGNÓSTICO GRATUITO
+                    </button>
+
+                </form>
+
+                <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    © Boss Curiosidades — Estruturas Inteligentes para Negócios Modernos.
+</footer>
 
 <script>
-    var submitted = false;
-    function showSuccess() {
-        document.getElementById('form-wrap').style.display = 'none';
-        document.getElementById('success').style.display = 'block';
-        window.scrollTo({ top: document.getElementById('success').offsetTop - 100, behavior: 'smooth' });
-    }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.animate([
+                    { opacity: 0, transform: 'translateY(40px)' },
+                    { opacity: 1, transform: 'translateY(0px)' }
+                ], {
+                    duration: 900,
+                    easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+                    fill: 'forwards'
+                });
+            }
+        });
+    });
 
-    function reveal() {
-        var reveals = document.querySelectorAll(".reveal");
-        for (var i = 0; i < reveals.length; i++) {
-            var windowHeight = window.innerHeight;
-            var elementTop = reveals[i].getBoundingClientRect().top;
-            if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
-        }
-    }
-    window.addEventListener("scroll", reveal);
-    reveal();
+    document.querySelectorAll('.card, h1, h2, .form-box').forEach(el => {
+        el.style.opacity = 0;
+        observer.observe(el);
+    });
 </script>
 
 </body>
 </html>
+```
+
+## IMPORTANTE
+
+Substitua:
+
+```html
+SEU_FORM_ID
+```
+
+pelo ID real do seu Google Forms.
+
+E mantenha os `entry.xxxxx` exatamente iguais aos do seu formulário atual para continuar recebendo as respostas normalmente.
