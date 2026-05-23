@@ -1,6 +1,3 @@
-# Landing Page — Boss Curiosidades | Diagnóstico Estratégico
-
-```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,17 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boss Curiosidades | Diagnóstico Estratégico</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts Premium: Inter para leitura limpa e Cinzel Decorative para toques de elegância extrema -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg: #050505;
+            --bg: #030303;
             --orange: #FF4D00;
+            --orange-rgb: 255, 77, 0;
+            --orange-glow: #FF6A28;
             --gold: #D4AF37;
-            --silver: #CFCFCF;
+            --gold-rgb: 212, 175, 55;
+            --silver: #A9A9A9;
             --white: #FFFFFF;
-            --card: rgba(255,255,255,0.03);
-            --border: rgba(255,255,255,0.08);
+            --card: rgba(10, 10, 10, 0.6);
+            --border: rgba(255, 255, 255, 0.05);
+            --border-hover: rgba(255, 77, 0, 0.3);
+            --text-muted: #8F8F8F;
         }
 
         * {
@@ -32,176 +37,318 @@
         }
 
         body {
-            background:
-                radial-gradient(circle at top right, rgba(255,77,0,0.08), transparent 30%),
-                radial-gradient(circle at bottom left, rgba(212,175,55,0.04), transparent 30%),
-                var(--bg);
+            background-color: var(--bg);
             color: var(--silver);
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            line-height: 1.8;
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+            position: relative;
         }
 
+        /* Ambient Premium Glows - Melhorados com Camadas Profundas */
+        .ambient-glow-1 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(var(--orange-rgb), 0.12) 0%, transparent 70%);
+            top: -150px;
+            right: -100px;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(60px);
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(var(--gold-rgb), 0.04) 0%, transparent 70%);
+            top: 40%;
+            left: -200px;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(80px);
+        }
+
+        .ambient-glow-3 {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(var(--orange-rgb), 0.06) 0%, transparent 70%);
+            bottom: -100px;
+            right: -100px;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(70px);
+        }
+
+        /* Ruído de fundo premium sutil em overlay nativo CSS */
         .noise {
             position: fixed;
             inset: 0;
-            background-image: url('https://grainy-gradients.vercel.app/noise.svg');
-            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.015'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 999;
         }
 
+        /* Barra de progresso de leitura ultra fina */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--orange), var(--gold));
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+        }
+
         .container {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 28px;
+            padding: 0 40px;
+            position: relative;
+            z-index: 10;
         }
 
         section {
-            padding: 100px 0;
+            padding: 140px 0;
             position: relative;
         }
 
+        /* Badges Minimalistas e Sofisticados */
         .badge {
             color: var(--orange);
-            font-size: 12px;
-            letter-spacing: 4px;
+            font-size: 11px;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            font-weight: 900;
-            margin-bottom: 20px;
-            display: inline-block;
+            font-weight: 800;
+            margin-bottom: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
 
+        .badge::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--orange);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--orange);
+        }
+
+        /* Tipografia de Alto Padrão */
         h1 {
-            font-size: clamp(2.6rem, 7vw, 5.6rem);
-            line-height: 1.05;
+            font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+            line-height: 1.1;
             color: var(--white);
-            font-weight: 900;
-            margin-bottom: 28px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 35px;
         }
 
         h2 {
-            font-size: clamp(2rem, 4vw, 3.4rem);
-            line-height: 1.15;
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            line-height: 1.2;
             color: var(--white);
-            font-weight: 900;
-            margin-bottom: 28px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 30px;
         }
 
         h3 {
-            font-size: 1.2rem;
-            color: var(--orange);
-            margin-bottom: 18px;
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 24px;
             font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--white) 30%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline;
+        }
+
+        .highlight-orange {
+            background: linear-gradient(135deg, var(--orange) 0%, var(--orange-glow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         p {
-            font-size: 1.05rem;
-            color: var(--silver);
-            margin-bottom: 18px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+            font-weight: 400;
+            line-height: 1.7;
         }
 
+        /* Hero Section Premium Layout */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            position: relative;
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(255,77,0,0.18), transparent 70%);
-            top: -150px;
-            right: -150px;
-            filter: blur(40px);
+            padding-top: 100px;
+            padding-bottom: 100px;
         }
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 60px;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 80px;
             align-items: center;
-        }
-
-        .highlight {
-            color: var(--orange);
         }
 
         .hero p {
             font-size: 1.15rem;
-            max-width: 760px;
+            max-width: 680px;
         }
 
+        /* Call To Action - Efeito Cinético Tridimensional */
         .cta {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            background: linear-gradient(135deg, var(--orange), #ff6f32);
+            gap: 14px;
+            background: linear-gradient(135deg, #111 0%, #000 100%);
             color: var(--white);
-            padding: 18px 34px;
-            border-radius: 999px;
+            padding: 20px 42px;
+            border-radius: 12px;
             text-decoration: none;
-            font-weight: 800;
-            margin-top: 25px;
-            transition: 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.08);
-            box-shadow: 0 0 30px rgba(255,77,0,0.2);
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            margin-top: 35px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid var(--orange);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(255, 77, 0, 0.12);
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--orange), var(--orange-glow));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .cta span {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta svg {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 45px rgba(255,77,0,0.35);
+            transform: translateY(-4px);
+            border-color: var(--orange-glow);
+            box-shadow: 0 30px 60px rgba(255, 77, 0, 0.25);
+            color: var(--white);
         }
 
+        .cta:hover::before {
+            opacity: 1;
+        }
+
+        .cta:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* Cards Neumórficos/Glow Premium */
         .card {
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 26px;
-            padding: 40px;
-            backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 48px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             position: relative;
-            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
-            pointer-events: none;
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 
+                        0 0 50px rgba(255, 77, 0, 0.02);
         }
 
+        /* Listas de Tópicos Minimalistas e Avançadas */
         .list {
-            margin-top: 30px;
+            margin-top: 24px;
             display: grid;
-            gap: 16px;
+            gap: 14px;
         }
 
         .list div {
-            background: rgba(255,255,255,0.025);
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 16px 18px;
-            border-radius: 16px;
-            transition: 0.3s ease;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 18px 22px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .list-negative div::before {
+            content: '✕';
+            color: #ff3b30;
+            font-size: 0.85rem;
+            font-weight: 900;
+            opacity: 0.7;
+        }
+
+        .list-positive div::before {
+            content: '✓';
+            color: #34c759;
+            font-size: 0.95rem;
+            font-weight: 900;
+            opacity: 0.8;
         }
 
         .list div:hover {
             transform: translateX(6px);
-            border-color: rgba(255,77,0,0.3);
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.08);
         }
 
+        .list-negative div:hover {
+            border-color: rgba(255, 59, 48, 0.2);
+        }
+
+        .list-positive div:hover {
+            border-color: rgba(52, 199, 89, 0.2);
+        }
+
+        /* Quotes de Alta Relevância */
         .quote {
-            margin-top: 35px;
-            font-size: 1.2rem;
-            font-weight: 700;
+            margin-top: 40px;
+            font-size: 1.15rem;
+            font-weight: 600;
             color: var(--white);
-            border-left: 3px solid var(--orange);
-            padding-left: 20px;
+            border-left: 2px solid var(--orange);
+            padding-left: 24px;
+            line-height: 1.6;
         }
 
         .section-grid {
@@ -210,104 +357,239 @@
             gap: 40px;
         }
 
+        /* Caixa de Formulário Premium Embutida */
         .form-box {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 28px;
-            padding: 40px;
+            background: linear-gradient(180deg, rgba(15, 15, 15, 0.7) 0%, rgba(5, 5, 5, 0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 24px;
+            padding: 56px;
             margin-top: 60px;
-            backdrop-filter: blur(14px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .form-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10%;
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(var(--orange-rgb), 0.3), transparent);
+        }
+
+        .form-box h3 {
+            font-size: 1.7rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 40px;
         }
 
         form {
             display: grid;
-            gap: 18px;
-            margin-top: 30px;
+            gap: 24px;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        /* Custom Form Controls Premium */
+        .input-group {
+            position: relative;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--white);
+            margin-bottom: 10px;
+            opacity: 0.8;
         }
 
         input,
         textarea,
         select {
             width: 100%;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 16px;
-            padding: 18px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 18px 24px;
             color: var(--white);
+            font-family: 'Inter', sans-serif;
             font-size: 1rem;
             outline: none;
-            transition: 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238F8F8F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 16px;
+            padding-right: 50px;
+        }
+
+        input:hover,
+        textarea:hover,
+        select:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         input:focus,
         textarea:focus,
         select:focus {
-            border-color: rgba(255,77,0,0.5);
-            box-shadow: 0 0 20px rgba(255,77,0,0.15);
+            background: rgba(0, 0, 0, 0.8);
+            border-color: var(--orange);
+            box-shadow: 0 0 25px rgba(255, 77, 0, 0.08);
         }
 
-        button {
-            background: linear-gradient(135deg, var(--orange), #ff6f32);
+        /* Estilização para o placeholder nativo */
+        ::placeholder {
+            color: #555555;
+            opacity: 1;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(135deg, var(--orange) 0%, var(--orange-glow) 100%);
             border: none;
             color: var(--white);
             font-weight: 800;
-            font-size: 1rem;
-            padding: 18px;
-            border-radius: 16px;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            padding: 22px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: 0.3s ease;
-            margin-top: 10px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-top: 15px;
+            box-shadow: 0 15px 35px rgba(255, 77, 0, 0.2);
         }
 
-        button:hover {
+        button[type="submit"]:hover {
             transform: translateY(-3px);
-            box-shadow: 0 0 35px rgba(255,77,0,0.25);
+            box-shadow: 0 25px 50px rgba(255, 77, 0, 0.4);
+            filter: brightness(1.1);
         }
 
-        footer {
-            padding: 50px 0;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.06);
-            color: rgba(255,255,255,0.5);
-            font-size: 0.9rem;
+        button[type="submit"]:active {
+            transform: translateY(-1px);
         }
 
+        /* Divisores de Layout Avançados */
         .divider {
             width: 100%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-            margin: 40px 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            margin: 45px 0;
         }
 
-        @media(max-width: 900px) {
-            .hero-grid,
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.03);
+            color: #555555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* Animações Premium Ativadas por Scroll (Classes base controladas por JS) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsividade refinada para telas móveis e tablets */
+        @media(max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+                text-align: center;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .quote {
+                border-left: none;
+                border-top: 2px solid var(--orange);
+                padding-left: 0;
+                padding-top: 20px;
+                max-width: 500px;
+                margin: 35px auto 0 auto;
+            }
+
             .section-grid {
                 grid-template-columns: 1fr;
+                gap: 30px;
             }
 
             section {
-                padding: 70px 0;
+                padding: 90px 0;
+            }
+        }
+
+        @media(max-width: 640px) {
+            .container {
+                padding: 0 24px;
             }
 
-            .hero {
-                padding-top: 100px;
+            .form-box {
+                padding: 35px 20px;
+            }
+
+            input, textarea, select {
+                padding: 16px 20px;
             }
         }
     </style>
 </head>
 <body>
 
+<!-- Elementos de Atmosfera Premium -->
+<div class="scroll-progress" id="progressBar"></div>
 <div class="noise"></div>
+<div class="ambient-glow-1"></div>
+<div class="ambient-glow-2"></div>
+<div class="ambient-glow-3"></div>
 
+<!-- HERO SECTION -->
 <section class="hero">
     <div class="container hero-grid">
 
-        <div>
+        <div class="reveal">
             <span class="badge">Diagnóstico Estratégico</span>
 
             <h1>
                 O problema não é apenas vender.<br>
-                <span class="highlight">É sobreviver a um mercado que esmaga margens.</span>
+                <span class="highlight-orange">É sobreviver a um mercado que esmaga margens.</span>
             </h1>
 
             <p>
@@ -324,14 +606,16 @@
             </div>
 
             <a href="#diagnostico" class="cta">
-                RECEBER DIAGNÓSTICO GRATUITO
+                <span>RECEBER DIAGNÓSTICO GRATUITO 
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </span>
             </a>
         </div>
 
-        <div class="card">
-            <h3>Hoje, contratar mais já não resolve.</h3>
+        <div class="card reveal" style="transition-delay: 0.15s;">
+            <h3 style="color: var(--orange);">Hoje, contratar mais já não resolve.</h3>
 
-            <div class="list">
+            <div class="list list-negative">
                 <div>Mais pessoas.</div>
                 <div>Mais sistemas.</div>
                 <div>Mais mensalidades.</div>
@@ -341,11 +625,11 @@
 
             <div class="divider"></div>
 
-            <p>
+            <p style="color: var(--white); font-weight: 600;">
                 Empresas inteligentes estão fazendo o contrário:
             </p>
 
-            <div class="list">
+            <div class="list list-positive">
                 <div>Operações mais enxutas.</div>
                 <div>Menos desperdício.</div>
                 <div>Mais velocidade.</div>
@@ -357,10 +641,11 @@
     </div>
 </section>
 
+<!-- SEÇÃO 2: NOVO CENÁRIO -->
 <section>
     <div class="container section-grid">
 
-        <div class="card">
+        <div class="card reveal">
             <span class="badge">Novo cenário</span>
 
             <h2>
@@ -368,7 +653,7 @@
             </h2>
 
             <p>
-                Enquanto muitos negócios continuam tentando resolver desorganização contratando mais pessoas...
+                Qualquer negócio continua tentando resolver desorganização contratando mais pessoas...
             </p>
 
             <p>
@@ -380,14 +665,14 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card reveal" style="transition-delay: 0.15s;">
             <span class="badge">Problema do mercado</span>
 
             <h2>
                 O mercado complicou aquilo que deveria simplificar.
             </h2>
 
-            <div class="list">
+            <div class="list list-negative">
                 <div>Sistemas gigantes.</div>
                 <div>Implementações demoradas.</div>
                 <div>Contratos longos.</div>
@@ -405,10 +690,11 @@
     </div>
 </section>
 
+<!-- SEÇÃO 3: ESTRUTURA INTELIGENTE -->
 <section>
     <div class="container section-grid">
 
-        <div class="card">
+        <div class="card reveal">
             <span class="badge">Estrutura Inteligente</span>
 
             <h2>
@@ -428,7 +714,7 @@
             </p>
         </div>
 
-        <div class="card">
+        <div class="card reveal" style="transition-delay: 0.15s;">
             <span class="badge">Vivência real</span>
 
             <h2>
@@ -449,99 +735,143 @@
     </div>
 </section>
 
+<!-- SEÇÃO FORMULÁRIO COM INTEGRAÇÃO REAL COM O GOOGLE FORMS -->
 <section id="diagnostico">
     <div class="container">
 
-        <div class="card">
-            <span class="badge">Diagnóstico Operacional</span>
-
-            <h2>
-                Crescer sem eficiência virou risco.
-            </h2>
-
-            <p>
-                Receba uma análise estratégica para identificar gargalos invisíveis, desperdícios operacionais e pontos que podem estar reduzindo sua margem sem perceber.
-            </p>
-
-            <div class="form-box">
-
-                <h3>Solicitar diagnóstico gratuito</h3>
-
-                <form action="https://docs.google.com/forms/d/e/SEU_FORM_ID/formResponse" method="POST" target="hidden_iframe">
-
-                    <input type="text" name="entry.1111111111" placeholder="Seu nome" required>
-
-                    <input type="text" name="entry.2222222222" placeholder="Empresa ou projeto" required>
-
-                    <input type="email" name="entry.3333333333" placeholder="Seu melhor e-mail" required>
-
-                    <input type="text" name="entry.4444444444" placeholder="WhatsApp" required>
-
-                    <select name="entry.5555555555" required>
-                        <option value="">Qual sua maior dificuldade hoje?</option>
-                        <option>Processos lentos</option>
-                        <option>Perda de clientes</option>
-                        <option>Falta de organização</option>
-                        <option>Excesso de tarefas manuais</option>
-                        <option>Equipe sobrecarregada</option>
-                        <option>Custos operacionais altos</option>
-                    </select>
-
-                    <textarea name="entry.6666666666" rows="5" placeholder="Descreva brevemente sua operação ou principal gargalo"></textarea>
-
-                    <button type="submit">
-                        RECEBER DIAGNÓSTICO GRATUITO
-                    </button>
-
-                </form>
-
-                <iframe name="hidden_iframe" style="display:none;"></iframe>
-
+        <div class="card reveal" style="padding: 10px; border: none; background: transparent; backdrop-filter: none;">
+            <div style="text-align: center; max-width: 700px; margin: 0 auto 20px auto;">
+                <span class="badge">Diagnóstico Operacional</span>
+                <h2 style="margin-bottom: 20px;">Crescer sem eficiência virou risco.</h2>
+                <p>Receba uma análise estratégica para identificar gargalos invisíveis, desperdícios operacionais e pontos que podem estar reduzindo sua margem sem perceber.</p>
             </div>
 
+            <div class="form-box">
+                <h3>Solicitar diagnóstico gratuito</h3>
+                <p class="form-subtitle">Preencha os dados abaixo com atenção para iniciarmos a análise estrutural</p>
+
+                <!-- Formulário Conectado Oficialmente com o Google Forms fornecido -->
+                <form action="https://docs.google.com/forms/d/e/1FAIpQLSe79keCIYkL7hmtyzNdzFUFHGEG_K9loHBrjW2sNSm2_r7yQA/formResponse" method="POST" target="hidden_iframe" id="lpForm">
+
+                    <!-- Pergunta: Qual seu nome? -->
+                    <div class="input-group">
+                        <label class="input-label">Qual seu nome?</label>
+                        <input type="text" name="entry.678677076" placeholder="Escreva seu nome completo" required>
+                    </div>
+
+                    <!-- Pergunta: Qual é o número de WhatsApp? -->
+                    <div class="input-group">
+                        <label class="input-label">Qual é o número de WhatsApp?</label>
+                        <input type="tel" name="entry.1554549533" placeholder="(00) 99999-9999" required>
+                    </div>
+
+                    <!-- Pergunta: Coloque seu melhor e-mail: -->
+                    <div class="input-group">
+                        <label class="input-label">Coloque seu melhor e-mail:</label>
+                        <input type="email" name="entry.948827469" placeholder="exemplo@empresa.com" required>
+                    </div>
+
+                    <!-- Pergunta: Rede Social do Negócio (LinkedIn ou Instagram): -->
+                    <div class="input-group">
+                        <label class="input-label">Rede Social do Negócio (LinkedIn ou Instagram):</label>
+                        <input type="text" name="entry.436339199" placeholder="@usuario ou link do perfil" required>
+                    </div>
+
+                    <!-- Pergunta: Qual é seu principal objetivo ou ambição agora? -->
+                    <div class="input-group">
+                        <label class="input-label">Qual é seu principal objetivo ou ambição agora?</label>
+                        <select name="entry.1427730301" required>
+                            <option value="" disabled selected>Selecione seu principal objetivo</option>
+                            <option value="Processos lentos">Processos lentos</option>
+                            <option value="Perda de clientes">Perda de clientes</option>
+                            <option value="Falta de organização">Falta de organização</option>
+                            <option value="Excesso de tarefas manuais">Excesso de tarefas manuais</option>
+                            <option value="Equipe sobrecarregada">Equipe sobrecarregada</option>
+                            <option value="Custos operacionais altos">Custos operacionais altos</option>
+                        </select>
+                    </div>
+
+                    <!-- Pergunta: Por que você acredita que este é o momento certo para escalarmos sua estrutura? -->
+                    <div class="input-group">
+                        <label class="input-label">Por que você acredita que este é o momento certo para escalarmos sua estrutura?</label>
+                        <textarea name="entry.687557737" placeholder="Descreva brevemente sua operação ou principal gargalo" required></textarea>
+                    </div>
+
+                    <button type="submit" id="submitBtn">
+                        RECEBER DIAGNÓSTICO GRATUITO
+                    </button>
+                </form>
+
+                <!-- Iframe Oculto para evitar redirecionamento feio do Google Forms -->
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+            </div>
         </div>
 
     </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
     © Boss Curiosidades — Estruturas Inteligentes para Negócios Modernos.
 </footer>
 
+<!-- SCRIPTS PREMIUM: ANIMAÇÃO DE SCROLL E PROGRESSO -->
 <script>
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting){
-                entry.target.animate([
-                    { opacity: 0, transform: 'translateY(40px)' },
-                    { opacity: 1, transform: 'translateY(0px)' }
-                ], {
-                    duration: 900,
-                    easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-                    fill: 'forwards'
-                });
-            }
-        });
+    // 1. Barra de progresso de leitura dinâmica
+    window.addEventListener('scroll', () => {
+        const winScroll = document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById('progressBar').style.width = scrolled + '%';
     });
 
-    document.querySelectorAll('.card, h1, h2, .form-box').forEach(el => {
-        el.style.opacity = 0;
-        observer.observe(el);
+    // 2. Observer Avançado para Efeito Clean de Fade In + Subida suave dos elementos
+    const revealOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Executa apenas uma vez para performance
+            }
+        });
+    }, revealOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // 3. Feedback visual e reset elegante ao enviar o formulário
+    const form = document.getElementById('lpForm');
+    const iframe = document.getElementById('hidden_iframe');
+    const btn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', () => {
+        btn.innerText = "ENVIANDO SEUS DADOS...";
+        btn.style.pointerEvents = "none";
+        btn.style.opacity = "0.7";
+    });
+
+    iframe.addEventListener('load', () => {
+        // Quando o iframe carrega após o post do form
+        if (btn.innerText === "ENVIANDO SEUS DADOS...") {
+            btn.innerText = "DIAGNÓSTICO SOLICITADO COM SUCESSO!";
+            btn.style.background = "linear-gradient(135deg, #34c759 0%, #28a745 100%)";
+            btn.style.boxShadow = "0 15px 35px rgba(52, 199, 89, 0.2)";
+            form.reset();
+            setTimeout(() => {
+                btn.innerText = "RECEBER DIAGNÓSTICO GRATUITO";
+                btn.style.background = "linear-gradient(135deg, var(--orange) 0%, var(--orange-glow) 100%)";
+                btn.style.boxShadow = "0 15px 35px rgba(255, 77, 0, 0.2)";
+                btn.style.pointerEvents = "auto";
+                btn.style.opacity = "1";
+            }, 5000);
+        }
     });
 </script>
 
 </body>
 </html>
-```
-
-## IMPORTANTE
-
-Substitua:
-
-```html
-SEU_FORM_ID
-```
-
-pelo ID real do seu Google Forms.
-
-E mantenha os `entry.xxxxx` exatamente iguais aos do seu formulário atual para continuar recebendo as respostas normalmente.
