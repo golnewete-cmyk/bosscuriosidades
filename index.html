@@ -1,656 +1,430 @@
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boss Curiosidades | BOSS OS</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+
+<title>BOSS OS | Engenharia Operacional</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-:root{
-  --bg:#050505;
-  --or:#FF4D00;
-  --or2:#FF6A28;
-  --gold:#C9A84C;
-  --gold2:#E8CB6E;
-  --silver:#A8A8A8;
-  --white:#FFFFFF;
-  --muted:#555;
-  --card:rgba(10,10,10,.75);
-  --bdr:rgba(255,255,255,.06);
-  --bdr-or:rgba(255,77,0,.22);
-  --bdr-gold:rgba(201,168,76,.2);
-  --red:#FF3B30;
-  --green:#30D158;
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+
 body{
-  background:var(--bg);
-  color:var(--silver);
-  font-family:'Inter',sans-serif;
-  overflow-x:hidden;
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
+font-family:'Manrope',sans-serif;
+background:#050607;
+color:white;
+line-height:1.7;
 }
 
-/* ── NOISE ── */
-body::after{
-  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.016'/%3E%3C/svg%3E");
+.container{
+width:90%;
+max-width:1200px;
+margin:auto;
 }
 
-/* ── PROGRESS ── */
-#bar{position:fixed;top:0;left:0;height:1.5px;width:0;z-index:10000;
-  background:linear-gradient(90deg,var(--or),var(--gold));}
-
-/* ── GRID ── */
-.grid-bg{
-  position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.008) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.008) 1px,transparent 1px);
-  background-size:64px 64px;
+section{
+padding:100px 0;
 }
 
-/* ── AMBIENT GLOWS ── */
-.gl{position:fixed;pointer-events:none;z-index:0;border-radius:50%;filter:blur(100px);}
-.gl1{width:600px;height:600px;top:-80px;right:-80px;
-  background:radial-gradient(circle,rgba(255,77,0,.09) 0%,transparent 70%);}
-.gl2{width:700px;height:700px;top:50%;left:-200px;
-  background:radial-gradient(circle,rgba(201,168,76,.05) 0%,transparent 70%);}
-.gl3{width:500px;height:500px;bottom:-100px;right:10%;
-  background:radial-gradient(circle,rgba(255,77,0,.06) 0%,transparent 70%);}
-
-/* ── LAYOUT ── */
-.w{width:100%;max-width:1100px;margin:0 auto;padding:0 44px;position:relative;z-index:10;}
-section{padding:110px 0;position:relative;}
-
-/* ── TYPE ── */
-.eye{
-  font-family:'Inter',sans-serif;font-size:9px;font-weight:700;
-  letter-spacing:4px;text-transform:uppercase;color:var(--or);
-  display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+background:
+radial-gradient(circle at top right,#D4AF3730,transparent 35%);
 }
-.eye::before{content:'';width:18px;height:1px;background:var(--or);}
+
+.hero-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+}
+
+.badge{
+display:inline-block;
+padding:10px 18px;
+border:1px solid #D4AF37;
+border-radius:999px;
+color:#D4AF37;
+font-size:.8rem;
+margin-bottom:25px;
+}
 
 h1{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(2.6rem,5.2vw,4.6rem);
-  line-height:1.05;color:var(--white);font-weight:800;
-  letter-spacing:-.035em;margin-bottom:24px;
-}
-h2{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(1.7rem,2.8vw,2.5rem);
-  line-height:1.12;color:var(--white);font-weight:700;
-  letter-spacing:-.025em;margin-bottom:18px;
-}
-h3{
-  font-family:'Syne',sans-serif;font-size:1.1rem;
-  color:var(--white);font-weight:700;letter-spacing:-.01em;margin-bottom:10px;
-}
-p{font-size:.97rem;line-height:1.75;margin-bottom:14px;}
-
-.em-or{color:var(--or);}
-.em-gold{
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
-.em-wh{color:var(--white);font-weight:600;}
-
-/* ── HERO ── */
-.hero{min-height:100vh;display:flex;align-items:center;padding-top:80px;padding-bottom:80px;}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:72px;align-items:center;}
-
-/* vertical accent tape */
-.headline-tape{position:relative;padding-left:22px;}
-.headline-tape::before{
-  content:'';position:absolute;left:0;top:4px;bottom:4px;width:2px;
-  background:linear-gradient(180deg,var(--or) 0%,transparent 100%);
+font-size:4rem;
+line-height:1.1;
+margin-bottom:25px;
 }
 
-.hero p{font-size:1.05rem;color:var(--silver);max-width:500px;}
-
-/* ── STAT ROW ── */
-.stats{display:flex;gap:36px;margin-top:36px;flex-wrap:wrap;}
-.stat{padding-left:16px;border-left:1.5px solid var(--bdr-or);}
-.stat-n{
-  font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;
-  color:var(--white);line-height:1;margin-bottom:3px;
+.gold{
+color:#D4AF37;
 }
-.stat-d{font-size:.75rem;color:var(--muted);line-height:1.4;max-width:100px;}
 
-/* ── CTA ── */
+p{
+color:#C0C6CE;
+}
+
 .btn{
-  display:inline-flex;align-items:center;gap:12px;
-  background:var(--or);color:var(--white);text-decoration:none;
-  font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;
-  letter-spacing:1.5px;text-transform:uppercase;
-  padding:17px 34px;border-radius:3px;margin-top:32px;
-  border:none;cursor:pointer;
-  transition:all .35s cubic-bezier(.16,1,.3,1);
-  position:relative;overflow:hidden;
+display:inline-block;
+margin-top:30px;
+padding:18px 32px;
+background:#D4AF37;
+color:#111;
+text-decoration:none;
+font-weight:700;
+border-radius:10px;
 }
-.btn::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.12),transparent);
-  opacity:0;transition:opacity .3s;
-}
-.btn:hover{transform:translateY(-3px);box-shadow:0 18px 48px rgba(255,77,0,.35);color:var(--white);}
-.btn:hover::before{opacity:1;}
-.btn svg{transition:transform .35s cubic-bezier(.16,1,.3,1);}
-.btn:hover svg{transform:translateX(4px);}
 
-/* ── HERO RIGHT PANEL ── */
 .panel{
-  background:rgba(8,8,8,.85);
-  border:1px solid var(--bdr);border-radius:12px;
-  overflow:hidden;backdrop-filter:blur(24px);
-  box-shadow:0 40px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04);
+background:#0C0E11;
+border:1px solid rgba(255,255,255,.08);
+border-radius:20px;
+padding:40px;
 }
-.panel-head{
-  padding:16px 24px;
-  border-bottom:1px solid var(--bdr);
-  background:rgba(255,77,0,.05);
-  display:flex;align-items:center;gap:8px;
-}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--or);
-  box-shadow:0 0 8px var(--or);animation:blink 2s ease-in-out infinite;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
-.panel-head span{font-size:.7rem;font-weight:700;letter-spacing:2.5px;
-  text-transform:uppercase;color:var(--or);}
-.panel-body{padding:24px;}
-.panel-label{font-size:.65rem;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
-.metric-big{
-  font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;
-  color:var(--white);line-height:1;margin-bottom:4px;
-}
-.metric-sub{font-size:.78rem;color:var(--muted);margin-bottom:0;}
-.panel-div{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);margin:18px 0;}
-.wrow{display:flex;align-items:center;justify-content:space-between;
-  padding:9px 0;border-bottom:1px solid rgba(255,255,255,.025);font-size:.83rem;}
-.wrow:last-child{border:none;}
-.wname{color:var(--silver);}
-.wcost{font-family:'Syne',sans-serif;font-weight:700;color:var(--red);font-size:.88rem;}
-.panel-footer{
-  padding:16px 24px;
-  background:rgba(48,209,88,.04);
-  border-top:1px solid rgba(48,209,88,.08);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.pf-label{font-size:.7rem;color:var(--muted);}
-.pf-val{font-family:'Syne',sans-serif;font-weight:800;color:var(--green);font-size:1.05rem;}
 
-/* ── SECTION: PROBLEMA ── */
-.two{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+.row{
+display:flex;
+justify-content:space-between;
+padding:15px 0;
+border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.ok{
+color:#35D15A;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+margin-top:50px;
+}
+
 .card{
-  background:var(--card);border:1px solid var(--bdr);border-radius:10px;
-  padding:36px;backdrop-filter:blur(20px);
-  transition:all .4s cubic-bezier(.16,1,.3,1);
-}
-.card:hover{border-color:rgba(255,255,255,.1);transform:translateY(-3px);}
-.card-or{border-color:var(--bdr-or);}
-.card-or:hover{border-color:rgba(255,77,0,.35);}
-
-.chk{display:flex;gap:10px;align-items:flex-start;padding:9px 0;
-  border-bottom:1px solid rgba(255,255,255,.03);font-size:.88rem;}
-.chk:last-child{border:none;}
-.chk-ic{flex-shrink:0;font-size:.75rem;margin-top:2px;}
-.bad .chk-ic{color:var(--red);}
-.good .chk-ic{color:var(--green);}
-.bad .chk-txt{color:rgba(255,255,255,.55);}
-.good .chk-txt{color:rgba(255,255,255,.82);}
-
-/* ── MANIFESTO ── */
-.manifesto{padding:80px 0;text-align:center;}
-.man-inner{max-width:760px;margin:0 auto;}
-.hline{display:flex;align-items:center;gap:18px;margin:32px 0;}
-.hline::before,.hline::after{content:'';flex:1;height:1px;}
-.hline::before{background:linear-gradient(90deg,transparent,rgba(255,255,255,.06));}
-.hline::after{background:linear-gradient(90deg,rgba(255,255,255,.06),transparent);}
-.diamond{width:5px;height:5px;background:var(--or);transform:rotate(45deg);}
-blockquote{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(1.3rem,2.4vw,2rem);font-weight:700;
-  line-height:1.3;color:var(--white);letter-spacing:-.02em;
-  margin-bottom:18px;
-}
-blockquote em{font-style:normal;color:var(--or);}
-.man-attr{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
-
-/* ── BOSS OS LAYERS ── */
-.os-bg{background:rgba(4,4,4,.6);}
-.os-head{max-width:520px;margin-bottom:16px;}
-.layers{border:1px solid var(--bdr);border-radius:10px;overflow:hidden;margin-top:40px;}
-.layer{
-  display:grid;grid-template-columns:70px 1fr 90px;
-  border-bottom:1px solid var(--bdr);
-  background:rgba(8,8,8,.8);
-  transition:background .3s;
-}
-.layer:last-child{border:none;}
-.layer:hover{background:rgba(255,77,0,.04);}
-.l-num{
-  display:flex;align-items:center;justify-content:center;
-  border-right:1px solid var(--bdr);
-  font-family:'Syne',sans-serif;font-size:.65rem;font-weight:800;
-  letter-spacing:2px;color:var(--or);
-}
-.l-body{padding:24px 28px;}
-.l-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;
-  color:var(--white);margin-bottom:5px;}
-.l-desc{font-size:.83rem;color:var(--muted);line-height:1.5;margin:0;}
-.l-badge{
-  display:flex;align-items:center;justify-content:center;
-  border-left:1px solid var(--bdr);
-  font-size:.62rem;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;color:var(--or);text-align:center;
-  padding:0 8px;
+background:#0C0E11;
+padding:30px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.05);
 }
 
-/* ── COMPARE ── */
-.cmp{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--bdr);
-  border-radius:10px;overflow:hidden;margin-top:32px;}
-.cmp-head{padding:14px 20px;font-size:.7rem;font-weight:700;
-  letter-spacing:2px;text-transform:uppercase;}
-.cmp-head.bad{background:rgba(255,59,48,.07);color:var(--red);
-  border-bottom:1px solid rgba(255,59,48,.12);}
-.cmp-head.good{background:rgba(48,209,88,.05);color:var(--green);
-  border-bottom:1px solid rgba(48,209,88,.1);}
-.ci{padding:12px 20px;font-size:.84rem;font-weight:500;
-  border-bottom:1px solid rgba(255,255,255,.03);
-  display:flex;align-items:center;gap:8px;}
-.ci:last-child{border:none;}
-.ci.bad{background:rgba(255,59,48,.025);color:rgba(255,255,255,.5);}
-.ci.bad::before{content:'✕';color:var(--red);font-size:.7rem;opacity:.65;flex-shrink:0;}
-.ci.good{background:rgba(48,209,88,.025);color:rgba(255,255,255,.78);}
-.ci.good::before{content:'✓';color:var(--green);font-size:.75rem;opacity:.75;flex-shrink:0;}
-
-/* ── FORM ── */
-.form-wrap{max-width:700px;margin:0 auto;}
-.form-head{text-align:center;margin-bottom:48px;}
-.form-head p{color:var(--silver);max-width:440px;margin:0 auto;}
-.fbox{
-  background:rgba(6,6,6,.92);border:1px solid var(--bdr);
-  border-radius:14px;padding:52px;
-  position:relative;overflow:hidden;
-  box-shadow:0 40px 80px rgba(0,0,0,.5);
-}
-.fbox::before{
-  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(255,77,0,.35),transparent);
-}
-.ilabel{
-  display:block;font-size:.68rem;font-weight:700;
-  letter-spacing:2px;text-transform:uppercase;
-  color:rgba(255,255,255,.55);margin-bottom:8px;
-}
-input,textarea,select{
-  width:100%;background:rgba(255,255,255,.02);
-  border:1px solid rgba(255,255,255,.07);border-radius:6px;
-  padding:14px 18px;color:var(--white);
-  font-family:'Inter',sans-serif;font-size:.93rem;outline:none;
-  transition:all .28s ease;
-  appearance:none;-webkit-appearance:none;
-}
-select{
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 14px center;
-  background-size:13px;padding-right:40px;
-}
-select option{background:#111;color:var(--white);}
-input:focus,textarea:focus,select:focus{
-  border-color:var(--or);background:rgba(0,0,0,.65);
-  box-shadow:0 0 0 3px rgba(255,77,0,.07);
-}
-::placeholder{color:#3a3a3a;opacity:1;}
-textarea{resize:vertical;min-height:120px;}
-.fg{display:grid;gap:20px;}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.sub-btn{
-  width:100%;margin-top:4px;background:var(--or);color:var(--white);
-  font-family:'Syne',sans-serif;font-weight:800;font-size:.82rem;
-  letter-spacing:2px;text-transform:uppercase;
-  padding:18px;border-radius:6px;border:none;cursor:pointer;
-  transition:all .35s cubic-bezier(.16,1,.3,1);
-}
-.sub-btn:hover{transform:translateY(-2px);box-shadow:0 18px 48px rgba(255,77,0,.32);filter:brightness(1.08);}
-
-/* ── FOOTER ── */
-footer{border-top:1px solid rgba(255,255,255,.04);padding:36px 0;}
-.ft{display:flex;align-items:center;justify-content:space-between;gap:20px;}
-.ft-logo{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:var(--white);}
-.ft-copy{font-size:.75rem;color:var(--muted);}
-.ft-ig{font-size:.75rem;color:var(--muted);text-decoration:none;}
-.ft-ig:hover{color:var(--or);}
-
-/* ── GOLD ACCENT TAG ── */
-.tag-gold{
-  display:inline-block;
-  background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(232,203,110,.06));
-  border:1px solid var(--bdr-gold);
-  color:var(--gold2);
-  font-size:.72rem;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;padding:5px 14px;border-radius:40px;
-  margin-bottom:16px;
+.card h3{
+margin-bottom:15px;
+color:#D4AF37;
 }
 
-/* ── REVEAL ── */
-.rv{opacity:0;transform:translateY(22px);
-  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
-.rv.on{opacity:1;transform:translateY(0);}
+.form-box{
+max-width:800px;
+margin:auto;
+background:#0C0E11;
+padding:50px;
+border-radius:24px;
+border:1px solid rgba(255,255,255,.08);
+}
 
-/* ── RESPONSIVE ── */
-@media(max-width:1020px){
-  .hero-grid{grid-template-columns:1fr;gap:48px;}
-  .two{grid-template-columns:1fr;}
-  .cmp{grid-template-columns:1fr;}
-  .cmp-head.bad,.ci.bad{display:none;}
-  .ft{flex-direction:column;text-align:center;}
+.input-group{
+margin-bottom:20px;
 }
-@media(max-width:620px){
-  .w{padding:0 22px;}
-  section{padding:72px 0;}
-  .fbox{padding:28px 20px;}
-  .frow{grid-template-columns:1fr;}
-  .layer{grid-template-columns:56px 1fr;}
-  .l-badge{display:none;}
-  h1{font-size:2.2rem;}
+
+label{
+display:block;
+margin-bottom:8px;
 }
+
+input,
+select,
+textarea{
+width:100%;
+padding:16px;
+background:#111418;
+border:1px solid rgba(255,255,255,.08);
+border-radius:10px;
+color:white;
+}
+
+button{
+width:100%;
+padding:18px;
+background:#D4AF37;
+border:none;
+border-radius:10px;
+font-weight:700;
+cursor:pointer;
+}
+
+footer{
+padding:40px 0;
+text-align:center;
+color:#777;
+border-top:1px solid rgba(255,255,255,.08);
+}
+
+@media(max-width:900px){
+
+.hero-grid{
+grid-template-columns:1fr;
+}
+
+.cards{
+grid-template-columns:1fr;
+}
+
+h1{
+font-size:2.8rem;
+}
+
+}
+
 </style>
 </head>
-<body>
-<div id="bar"></div>
-<div class="grid-bg"></div>
-<div class="gl gl1"></div>
-<div class="gl gl2"></div>
-<div class="gl gl3"></div>
 
-<!-- ══ HERO ══ -->
+<body>
+
 <section class="hero">
-<div class="w">
+
+<div class="container">
+
 <div class="hero-grid">
 
-  <div class="rv">
-    <span class="eye">Boss Curiosidades</span>
-    <div class="headline-tape">
-      <h1>
-        Seu negócio<br>
-        está <span class="em-or">sangrando</span><br>
-        sem você ver.
-      </h1>
-    </div>
-    <p>
-      Não é problema de venda. É a sua operação consumindo <span class="em-wh">tempo, dinheiro e energia</span> que você nunca vai recuperar — até alguém mapear exatamente onde está o vazamento.
-    </p>
+<div>
 
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-n">+40%</div>
-        <div class="stat-d">de capacidade recuperável média nos negócios que diagnosticamos</div>
-      </div>
-      <div class="stat">
-        <div class="stat-n">3–5h</div>
-        <div class="stat-d">desperdiçadas pelo dono por semana em tarefas que não precisam dele</div>
-      </div>
-      <div class="stat">
-        <div class="stat-n">90 dias</div>
-        <div class="stat-d">para um sistema enxuto operar sem você no centro de tudo</div>
-      </div>
-    </div>
+<span class="badge">
+BUSINESS OPERATING SYSTEM
+</span>
 
-    <a href="#diagnostico" class="btn">
-      Quero meu diagnóstico gratuito
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
-  </div>
+<h1>
 
-  <!-- Panel -->
-  <div class="panel rv" style="transition-delay:.2s">
-    <div class="panel-head">
-      <div class="dot"></div>
-      <span>Diagnóstico ativo</span>
-    </div>
-    <div class="panel-body">
-      <p class="panel-label">Custo oculto semanal estimado</p>
-      <div class="metric-big">+40% da margem</div>
-      <p class="metric-sub">em horas do dono em atividades de baixo valor</p>
-      <div class="panel-div"></div>
-      <p class="panel-label">Vazamentos identificados</p>
-      <div class="wrow"><span class="wname">Cobranças sem automação</span><span class="wcost">alto</span></div>
-      <div class="wrow"><span class="wname">Follow-up manual de clientes</span><span class="wcost">alto</span></div>
-      <div class="wrow"><span class="wname">Retrabalho administrativo</span><span class="wcost">médio</span></div>
-      <div class="wrow"><span class="wname">Agenda sem sistema</span><span class="wcost">médio</span></div>
-    </div>
-    <div class="panel-footer">
-      <span class="pf-label">Potencial de recuperação</span>
-      <span class="pf-val">até +60% de capacidade</span>
-    </div>
-  </div>
+Empresas extraordinárias
+
+não crescem
+
+trabalhando mais.
+
+<br><br>
+
+Elas crescem
+
+<span class="gold">
+
+operando melhor.
+
+</span>
+
+</h1>
+
+<p>
+
+Aplicamos Engenharia de Produção,
+automação e inteligência artificial
+para transformar operações complexas
+em sistemas escaláveis e previsíveis.
+
+</p>
+
+<a href="#diagnostico" class="btn">
+
+Solicitar Diagnóstico Executivo
+
+</a>
 
 </div>
+
+<div class="panel">
+
+<h3>BOSS OS</h3>
+
+<div class="row">
+<span>Comercial</span>
+<span class="ok">Integrado</span>
 </div>
+
+<div class="row">
+<span>Financeiro</span>
+<span class="ok">Integrado</span>
+</div>
+
+<div class="row">
+<span>Atendimento</span>
+<span class="ok">Integrado</span>
+</div>
+
+<div class="row">
+<span>Processos</span>
+<span class="ok">Integrado</span>
+</div>
+
+<div class="row">
+<span>Automações</span>
+<span class="ok">Integrado</span>
+</div>
+
+<div class="row">
+<span>Indicadores</span>
+<span class="ok">Integrado</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </section>
 
-<!-- ══ PROBLEMA ══ -->
 <section>
-<div class="w">
-  <div class="rv" style="max-width:580px;margin-bottom:48px;">
-    <span class="eye">O problema invisível</span>
-    <h2>Você tem um negócio ou tem um emprego disfarçado de empresa?</h2>
-    <p>Quando qualquer coisa fora do padrão precisa de você para resolver, a empresa não cresce — ela consome.</p>
-  </div>
 
-  <div class="two rv" style="transition-delay:.1s">
-    <div class="card card-or">
-      <h3 style="color:var(--red)">O ciclo que trava tudo</h3>
-      <p style="font-size:.88rem;margin-bottom:16px">Cada cliente novo aumenta a demanda operacional. Mas a solução contratada pelo mercado sempre foi a mesma: <em>contrata mais uma pessoa.</em></p>
-      <div class="bad">
-        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">Mais pessoas → mais custo → margens menores</span></div>
-        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">Mais ferramentas → mais complexidade → mais tempo gerindo</span></div>
-        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">Mais esforço → mesma estrutura quebrada → mesmo resultado</span></div>
-        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">O gargalo continua sendo você</span></div>
-      </div>
-    </div>
+<div class="container">
 
-    <div class="card">
-      <h3 style="color:var(--green)">O que negócios eficientes fazem diferente</h3>
-      <p style="font-size:.88rem;margin-bottom:16px">Não crescem adicionando pessoas ao caos. Primeiro redesenham o sistema — depois automatizam o que faz sentido.</p>
-      <div class="good">
-        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Operação funciona sem o dono no centro</span></div>
-        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Automação sobre processo saudável — não sobre caos</span></div>
-        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Visibilidade de onde o dinheiro vai de verdade</span></div>
-        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Cresce a capacidade — sem crescer a complexidade</span></div>
-      </div>
-    </div>
-  </div>
+<h2>
+O problema não é falta de esforço.
+</h2>
+
+<p>
+
+A maioria dos profissionais altamente qualificados
+não possui uma empresa.
+
+Possui um emprego disfarçado de negócio.
+
+Quanto mais clientes entram,
+mais tarefas surgem.
+
+Quanto mais tarefas surgem,
+menos tempo sobra para crescer.
+
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Desperdícios</h3>
+<p>Tarefas repetitivas consumindo tempo valioso.</p>
 </div>
+
+<div class="card">
+<h3>Gargalos</h3>
+<p>Processos dependentes das pessoas certas.</p>
+</div>
+
+<div class="card">
+<h3>Retrabalho</h3>
+<p>Falta de padronização operacional.</p>
+</div>
+
+<div class="card">
+<h3>Escala</h3>
+<p>Crescimento sem aumento proporcional de esforço.</p>
+</div>
+
+</div>
+
+</div>
+
 </section>
 
-<!-- ══ MANIFESTO ══ -->
-<section class="manifesto">
-<div class="w">
-  <div class="man-inner rv">
-    <div class="hline"><div class="diamond"></div></div>
-    <blockquote>
-      "O mercado vendeu ferramentas.<br>
-      Nós instalamos <em>sistemas</em>.<br>
-      A diferença mora na sua margem."
-    </blockquote>
-    <p class="man-attr">— Filosofia Boss OS</p>
-    <div class="hline"><div class="diamond"></div></div>
-  </div>
-</div>
-</section>
-
-<!-- ══ BOSS OS ══ -->
-<section class="os-bg">
-<div class="w">
-  <div class="rv os-head">
-    <span class="tag-gold">Metodologia Proprietária</span>
-    <h2>BOSS OS<br><span style="font-size:1rem;font-weight:400;color:var(--muted);font-family:'Inter'">Business Operating System</span></h2>
-    <p>Não vendemos automação avulsa. Entregamos o sistema operacional completo do seu negócio — desenhado antes de qualquer ferramenta ser tocada.</p>
-  </div>
-
-  <div class="layers rv" style="transition-delay:.1s">
-    <div class="layer">
-      <div class="l-num">01</div>
-      <div class="l-body">
-        <div class="l-title">Diagnóstico de Fluxo</div>
-        <p class="l-desc">Mapeamos onde seu tempo está sendo destruído, onde clientes somem e onde o dinheiro vaza sem você perceber. Tudo quantificado.</p>
-      </div>
-      <div class="l-badge">Diagnóstico</div>
-    </div>
-    <div class="layer">
-      <div class="l-num">02</div>
-      <div class="l-body">
-        <div class="l-title">Arquitetura Enxuta</div>
-        <p class="l-desc">Redesenhamos os processos críticos. Eliminamos etapas que existem por hábito, não por necessidade. Estado futuro documentado e claro.</p>
-      </div>
-      <div class="l-badge">Engenharia</div>
-    </div>
-    <div class="layer">
-      <div class="l-num">03</div>
-      <div class="l-body">
-        <div class="l-title">Automação Robusta</div>
-        <p class="l-desc">Implementação técnica sobre a arquitetura saudável. A ferramenta serve o sistema — nunca o contrário. IA onde gera retorno real.</p>
-      </div>
-      <div class="l-badge">Execução</div>
-    </div>
-    <div class="layer">
-      <div class="l-num">04</div>
-      <div class="l-body">
-        <div class="l-title">Inteligência Operacional</div>
-        <p class="l-desc">Dashboard que mostra em tempo real onde o negócio está saudável e onde está sangrando. Decisão baseada em dado — não em sensação.</p>
-      </div>
-      <div class="l-badge">Visibilidade</div>
-    </div>
-  </div>
-
-  <div class="cmp rv" style="transition-delay:.15s">
-    <div class="cmp-head bad">Abordagem comum do mercado</div>
-    <div class="cmp-head good">Abordagem BOSS OS</div>
-    <div class="ci bad">Vende ferramenta, não sistema</div>
-    <div class="ci good">Projeta sistema antes de qualquer ferramenta</div>
-    <div class="ci bad">Automação sobre processo quebrado</div>
-    <div class="ci good">Engenharia de processo primeiro</div>
-    <div class="ci bad">Entrega e desaparece</div>
-    <div class="ci good">Operação assistida até estabilizar</div>
-    <div class="ci bad">Nenhum indicador de retorno</div>
-    <div class="ci good">Dashboard de impacto mensurável</div>
-  </div>
-</div>
-</section>
-
-<!-- ══ DIAGNÓSTICO / FORM ══ -->
 <section id="diagnostico">
-<div class="w">
-  <div class="form-wrap">
-    <div class="form-head rv">
-      <span class="eye">Diagnóstico Operacional Gratuito</span>
-      <h2>Descubra onde sua<br>operação está sangrando.</h2>
-      <p>30 minutos de análise. Identificamos os gargalos invisíveis que estão destruindo sua margem — sem pitch, sem proposta. Só diagnóstico.</p>
-    </div>
 
-    <div class="fbox rv" style="transition-delay:.12s">
-      <form action="https://docs.google.com/forms/d/e/1FAIpQLSe79keCIYkL7hmtyzNdzFUFHGEG_K9loHBrjW2sNSm2_r7yQA/formResponse" method="POST" target="hidden_iframe" id="lpForm">
-        <div class="fg">
+<div class="container">
 
-          <div class="frow">
-            <div>
-              <label class="ilabel">Qual seu nome?</label>
-              <input type="text" name="entry.678677076" placeholder="Nome completo" required>
-            </div>
-            <div>
-              <label class="ilabel">WhatsApp</label>
-              <input type="tel" name="entry.1554549533" placeholder="(51) 99999-9999" required>
-            </div>
-          </div>
+<div class="form-box">
 
-          <div>
-            <label class="ilabel">Melhor e-mail</label>
-            <input type="email" name="entry.948827469" placeholder="seuemail@empresa.com" required>
-          </div>
+<h2>
+Solicite um Diagnóstico Executivo
+</h2>
 
-          <div>
-            <label class="ilabel">Rede Social do Negócio (LinkedIn ou Instagram)</label>
-            <input type="text" name="entry.436339199" placeholder="@usuario ou link do perfil" required>
-          </div>
+<p style="margin-bottom:30px;">
 
-          <div>
-            <label class="ilabel">Qual é seu principal objetivo ou ambição agora?</label>
-            <select name="entry.1427730301" required>
-              <option value="" disabled selected>Selecione o maior gargalo atual</option>
-              <option value="Processos lentos">Processos lentos</option>
-              <option value="Perda de clientes">Perda de clientes</option>
-              <option value="Falta de organização">Falta de organização</option>
-              <option value="Excesso de tarefas manuais">Excesso de tarefas manuais</option>
-              <option value="Equipe sobrecarregada">Equipe sobrecarregada</option>
-              <option value="Custos operacionais altos">Custos operacionais altos</option>
-            </select>
-          </div>
+Identificamos gargalos,
+desperdícios e oportunidades
+de ganho de produtividade.
 
-          <div>
-            <label class="ilabel">Por que você acredita que este é o momento certo para escalarmos sua estrutura?</label>
-            <textarea name="entry.687557737" placeholder="Descreva brevemente sua operação ou principal gargalo" required></textarea>
-          </div>
+</p>
 
-          <button type="submit" class="sub-btn" id="submitBtn">
-            Solicitar diagnóstico gratuito →
-          </button>
-        </div>
-      </form>
-      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-    </div>
-  </div>
+<form action="https://docs.google.com/forms/d/e/1FAIpQLSe79keCIYkL7hmtyzNdzFUFHGEG_K9loHBrjW2sNSm2_r7yQA/formResponse"
+method="POST"
+target="hidden_iframe">
+
+<div class="input-group">
+<label>Nome</label>
+<input type="text" name="entry.678677076" required>
 </div>
+
+<div class="input-group">
+<label>WhatsApp</label>
+<input type="tel" name="entry.1554549533" required>
+</div>
+
+<div class="input-group">
+<label>Email</label>
+<input type="email" name="entry.948827469" required>
+</div>
+
+<div class="input-group">
+<label>Instagram ou LinkedIn</label>
+<input type="text" name="entry.436339199" required>
+</div>
+
+<div class="input-group">
+<label>Principal desafio</label>
+
+<select name="entry.1427730301">
+
+<option>Processos lentos</option>
+<option>Perda de clientes</option>
+<option>Falta de organização</option>
+<option>Excesso de tarefas manuais</option>
+<option>Equipe sobrecarregada</option>
+<option>Custos operacionais altos</option>
+
+</select>
+
+</div>
+
+<div class="input-group">
+
+<label>
+Descreva seu principal gargalo
+</label>
+
+<textarea
+name="entry.687557737"
+rows="5">
+</textarea>
+
+</div>
+
+<button type="submit">
+
+RECEBER DIAGNÓSTICO GRATUITO
+
+</button>
+
+</form>
+
+<iframe
+name="hidden_iframe"
+style="display:none;">
+</iframe>
+
+</div>
+
+</div>
+
 </section>
 
-<!-- ══ FOOTER ══ -->
 <footer>
-<div class="w">
-  <div class="ft">
-    <span class="ft-logo">BOSS CURIOSIDADES</span>
-    <span class="ft-copy">© 2026 — Estruturas Inteligentes para Negócios Modernos</span>
-    <a href="https://instagram.com/boss.curiosidades" target="_blank" class="ft-ig">@boss.curiosidades</a>
-  </div>
-</div>
+
+BOSS OS • Engenharia Operacional • Automação • IA
+
 </footer>
 
-<script>
-// Progress bar
-window.addEventListener('scroll',()=>{
-  const h=document.documentElement;
-  document.getElementById('bar').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
-});
-
-// Reveal
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
-},{threshold:.07,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-
-// Form
-const form=document.getElementById('lpForm');
-const btn=document.getElementById('submitBtn');
-const iframe=document.getElementById('hidden_iframe');
-form.addEventListener('submit',()=>{
-  btn.textContent='Enviando...';btn.style.opacity='.6';btn.style.pointerEvents='none';
-});
-iframe.addEventListener('load',()=>{
-  if(btn.textContent==='Enviando...'){
-    btn.textContent='Diagnóstico solicitado com sucesso ✓';
-    btn.style.background='linear-gradient(135deg,#30D158,#28a745)';
-    btn.style.opacity='1';form.reset();
-    setTimeout(()=>{
-      btn.textContent='Solicitar diagnóstico gratuito →';
-      btn.style.background='var(--or)';btn.style.pointerEvents='auto';
-    },6000);
-  }
-});
-</script>
 </body>
 </html>
