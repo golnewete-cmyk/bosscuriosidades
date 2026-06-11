@@ -1,877 +1,656 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boss Curiosidades | Diagnóstico Estratégico</title>
-
-    <!-- Google Fonts Premium: Inter para leitura limpa e Cinzel Decorative para toques de elegância extrema -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg: #030303;
-            --orange: #FF4D00;
-            --orange-rgb: 255, 77, 0;
-            --orange-glow: #FF6A28;
-            --gold: #D4AF37;
-            --gold-rgb: 212, 175, 55;
-            --silver: #A9A9A9;
-            --white: #FFFFFF;
-            --card: rgba(10, 10, 10, 0.6);
-            --border: rgba(255, 255, 255, 0.05);
-            --border-hover: rgba(255, 77, 0, 0.3);
-            --text-muted: #8F8F8F;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--silver);
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            line-height: 1.6;
-            letter-spacing: -0.01em;
-            position: relative;
-        }
-
-        /* Ambient Premium Glows - Melhorados com Camadas Profundas */
-        .ambient-glow-1 {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(var(--orange-rgb), 0.12) 0%, transparent 70%);
-            top: -150px;
-            right: -100px;
-            pointer-events: none;
-            z-index: 0;
-            filter: blur(60px);
-        }
-
-        .ambient-glow-2 {
-            position: absolute;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(var(--gold-rgb), 0.04) 0%, transparent 70%);
-            top: 40%;
-            left: -200px;
-            pointer-events: none;
-            z-index: 0;
-            filter: blur(80px);
-        }
-
-        .ambient-glow-3 {
-            position: absolute;
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(var(--orange-rgb), 0.06) 0%, transparent 70%);
-            bottom: -100px;
-            right: -100px;
-            pointer-events: none;
-            z-index: 0;
-            filter: blur(70px);
-        }
-
-        /* Ruído de fundo premium sutil em overlay nativo CSS */
-        .noise {
-            position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.015'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 999;
-        }
-
-        /* Barra de progresso de leitura ultra fina */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--orange), var(--gold));
-            width: 0%;
-            z-index: 1000;
-            transition: width 0.1s ease-out;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-            position: relative;
-            z-index: 10;
-        }
-
-        section {
-            padding: 140px 0;
-            position: relative;
-        }
-
-        /* Badges Minimalistas e Sofisticados */
-        .badge {
-            color: var(--orange);
-            font-size: 11px;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            font-weight: 800;
-            margin-bottom: 24px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .badge::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background-color: var(--orange);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--orange);
-        }
-
-        /* Tipografia de Alto Padrão */
-        h1 {
-            font-size: clamp(2.5rem, 5.5vw, 4.5rem);
-            line-height: 1.1;
-            color: var(--white);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 35px;
-        }
-
-        h2 {
-            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-            line-height: 1.2;
-            color: var(--white);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 30px;
-        }
-
-        h3 {
-            font-size: 1.3rem;
-            color: var(--white);
-            margin-bottom: 24px;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-        }
-
-        .highlight {
-            background: linear-gradient(135deg, var(--white) 30%, rgba(255,255,255,0.7) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
-            display: inline;
-        }
-
-        .highlight-orange {
-            background: linear-gradient(135deg, var(--orange) 0%, var(--orange-glow) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 22px;
-            font-weight: 400;
-            line-height: 1.7;
-        }
-
-        /* Hero Section Premium Layout */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 100px;
-            padding-bottom: 100px;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            max-width: 680px;
-        }
-
-        /* Call To Action - Efeito Cinético Tridimensional */
-        .cta {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            background: linear-gradient(135deg, #111 0%, #000 100%);
-            color: var(--white);
-            padding: 20px 42px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.05rem;
-            letter-spacing: 0.5px;
-            margin-top: 35px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid var(--orange);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(255, 77, 0, 0.12);
-        }
-
-        .cta::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, var(--orange), var(--orange-glow));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: 1;
-        }
-
-        .cta span {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .cta svg {
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .cta:hover {
-            transform: translateY(-4px);
-            border-color: var(--orange-glow);
-            box-shadow: 0 30px 60px rgba(255, 77, 0, 0.25);
-            color: var(--white);
-        }
-
-        .cta:hover::before {
-            opacity: 1;
-        }
-
-        .cta:hover svg {
-            transform: translateX(5px);
-        }
-
-        /* Cards Neumórficos/Glow Premium */
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 48px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            position: relative;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .card:hover {
-            border-color: rgba(255, 255, 255, 0.12);
-            transform: translateY(-5px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 
-                        0 0 50px rgba(255, 77, 0, 0.02);
-        }
-
-        /* Listas de Tópicos Minimalistas e Avançadas */
-        .list {
-            margin-top: 24px;
-            display: grid;
-            gap: 14px;
-        }
-
-        .list div {
-            background: rgba(255, 255, 255, 0.015);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            padding: 18px 22px;
-            border-radius: 14px;
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .list-negative div::before {
-            content: '✕';
-            color: #ff3b30;
-            font-size: 0.85rem;
-            font-weight: 900;
-            opacity: 0.7;
-        }
-
-        .list-positive div::before {
-            content: '✓';
-            color: #34c759;
-            font-size: 0.95rem;
-            font-weight: 900;
-            opacity: 0.8;
-        }
-
-        .list div:hover {
-            transform: translateX(6px);
-            background: rgba(255, 255, 255, 0.03);
-            border-color: rgba(255, 255, 255, 0.08);
-        }
-
-        .list-negative div:hover {
-            border-color: rgba(255, 59, 48, 0.2);
-        }
-
-        .list-positive div:hover {
-            border-color: rgba(52, 199, 89, 0.2);
-        }
-
-        /* Quotes de Alta Relevância */
-        .quote {
-            margin-top: 40px;
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--white);
-            border-left: 2px solid var(--orange);
-            padding-left: 24px;
-            line-height: 1.6;
-        }
-
-        .section-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-
-        /* Caixa de Formulário Premium Embutida */
-        .form-box {
-            background: linear-gradient(180deg, rgba(15, 15, 15, 0.7) 0%, rgba(5, 5, 5, 0.9) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 24px;
-            padding: 56px;
-            margin-top: 60px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
-            position: relative;
-        }
-
-        .form-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 10%;
-            width: 80%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(var(--orange-rgb), 0.3), transparent);
-        }
-
-        .form-box h3 {
-            font-size: 1.7rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-
-        .form-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 1rem;
-            margin-bottom: 40px;
-        }
-
-        form {
-            display: grid;
-            gap: 24px;
-            max-width: 760px;
-            margin: 0 auto;
-        }
-
-        /* Custom Form Controls Premium */
-        .input-group {
-            position: relative;
-        }
-
-        .input-label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--white);
-            margin-bottom: 10px;
-            opacity: 0.8;
-        }
-
-        input,
-        textarea,
-        select {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            padding: 18px 24px;
-            color: var(--white);
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            appearance: none;
-            -webkit-appearance: none;
-        }
-
-        select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238F8F8F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 20px center;
-            background-size: 16px;
-            padding-right: 50px;
-        }
-
-        input:hover,
-        textarea:hover,
-        select:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        input:focus,
-        textarea:focus,
-        select:focus {
-            background: rgba(0, 0, 0, 0.8);
-            border-color: var(--orange);
-            box-shadow: 0 0 25px rgba(255, 77, 0, 0.08);
-        }
-
-        /* Estilização para o placeholder nativo */
-        ::placeholder {
-            color: #555555;
-            opacity: 1;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 140px;
-        }
-
-        button[type="submit"] {
-            background: linear-gradient(135deg, var(--orange) 0%, var(--orange-glow) 100%);
-            border: none;
-            color: var(--white);
-            font-weight: 800;
-            font-size: 1.05rem;
-            letter-spacing: 0.5px;
-            padding: 22px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            margin-top: 15px;
-            box-shadow: 0 15px 35px rgba(255, 77, 0, 0.2);
-        }
-
-        button[type="submit"]:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 25px 50px rgba(255, 77, 0, 0.4);
-            filter: brightness(1.1);
-        }
-
-        button[type="submit"]:active {
-            transform: translateY(-1px);
-        }
-
-        /* Divisores de Layout Avançados */
-        .divider {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            margin: 45px 0;
-        }
-
-        footer {
-            padding: 60px 0;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.03);
-            color: #555555;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        /* Animações Premium Ativadas por Scroll (Classes base controladas por JS) */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsividade refinada para telas móveis e tablets */
-        @media(max-width: 1024px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 60px;
-                text-align: center;
-            }
-
-            .hero p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .quote {
-                border-left: none;
-                border-top: 2px solid var(--orange);
-                padding-left: 0;
-                padding-top: 20px;
-                max-width: 500px;
-                margin: 35px auto 0 auto;
-            }
-
-            .section-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            section {
-                padding: 90px 0;
-            }
-        }
-
-        @media(max-width: 640px) {
-            .container {
-                padding: 0 24px;
-            }
-
-            .form-box {
-                padding: 35px 20px;
-            }
-
-            input, textarea, select {
-                padding: 16px 20px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boss Curiosidades | BOSS OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050505;
+  --or:#FF4D00;
+  --or2:#FF6A28;
+  --gold:#C9A84C;
+  --gold2:#E8CB6E;
+  --silver:#A8A8A8;
+  --white:#FFFFFF;
+  --muted:#555;
+  --card:rgba(10,10,10,.75);
+  --bdr:rgba(255,255,255,.06);
+  --bdr-or:rgba(255,77,0,.22);
+  --bdr-gold:rgba(201,168,76,.2);
+  --red:#FF3B30;
+  --green:#30D158;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--silver);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── NOISE ── */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.016'/%3E%3C/svg%3E");
+}
+
+/* ── PROGRESS ── */
+#bar{position:fixed;top:0;left:0;height:1.5px;width:0;z-index:10000;
+  background:linear-gradient(90deg,var(--or),var(--gold));}
+
+/* ── GRID ── */
+.grid-bg{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.008) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.008) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+
+/* ── AMBIENT GLOWS ── */
+.gl{position:fixed;pointer-events:none;z-index:0;border-radius:50%;filter:blur(100px);}
+.gl1{width:600px;height:600px;top:-80px;right:-80px;
+  background:radial-gradient(circle,rgba(255,77,0,.09) 0%,transparent 70%);}
+.gl2{width:700px;height:700px;top:50%;left:-200px;
+  background:radial-gradient(circle,rgba(201,168,76,.05) 0%,transparent 70%);}
+.gl3{width:500px;height:500px;bottom:-100px;right:10%;
+  background:radial-gradient(circle,rgba(255,77,0,.06) 0%,transparent 70%);}
+
+/* ── LAYOUT ── */
+.w{width:100%;max-width:1100px;margin:0 auto;padding:0 44px;position:relative;z-index:10;}
+section{padding:110px 0;position:relative;}
+
+/* ── TYPE ── */
+.eye{
+  font-family:'Inter',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:4px;text-transform:uppercase;color:var(--or);
+  display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;
+}
+.eye::before{content:'';width:18px;height:1px;background:var(--or);}
+
+h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.6rem,5.2vw,4.6rem);
+  line-height:1.05;color:var(--white);font-weight:800;
+  letter-spacing:-.035em;margin-bottom:24px;
+}
+h2{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.7rem,2.8vw,2.5rem);
+  line-height:1.12;color:var(--white);font-weight:700;
+  letter-spacing:-.025em;margin-bottom:18px;
+}
+h3{
+  font-family:'Syne',sans-serif;font-size:1.1rem;
+  color:var(--white);font-weight:700;letter-spacing:-.01em;margin-bottom:10px;
+}
+p{font-size:.97rem;line-height:1.75;margin-bottom:14px;}
+
+.em-or{color:var(--or);}
+.em-gold{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.em-wh{color:var(--white);font-weight:600;}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:80px;padding-bottom:80px;}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:72px;align-items:center;}
+
+/* vertical accent tape */
+.headline-tape{position:relative;padding-left:22px;}
+.headline-tape::before{
+  content:'';position:absolute;left:0;top:4px;bottom:4px;width:2px;
+  background:linear-gradient(180deg,var(--or) 0%,transparent 100%);
+}
+
+.hero p{font-size:1.05rem;color:var(--silver);max-width:500px;}
+
+/* ── STAT ROW ── */
+.stats{display:flex;gap:36px;margin-top:36px;flex-wrap:wrap;}
+.stat{padding-left:16px;border-left:1.5px solid var(--bdr-or);}
+.stat-n{
+  font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;
+  color:var(--white);line-height:1;margin-bottom:3px;
+}
+.stat-d{font-size:.75rem;color:var(--muted);line-height:1.4;max-width:100px;}
+
+/* ── CTA ── */
+.btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--or);color:var(--white);text-decoration:none;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:17px 34px;border-radius:3px;margin-top:32px;
+  border:none;cursor:pointer;
+  transition:all .35s cubic-bezier(.16,1,.3,1);
+  position:relative;overflow:hidden;
+}
+.btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 18px 48px rgba(255,77,0,.35);color:var(--white);}
+.btn:hover::before{opacity:1;}
+.btn svg{transition:transform .35s cubic-bezier(.16,1,.3,1);}
+.btn:hover svg{transform:translateX(4px);}
+
+/* ── HERO RIGHT PANEL ── */
+.panel{
+  background:rgba(8,8,8,.85);
+  border:1px solid var(--bdr);border-radius:12px;
+  overflow:hidden;backdrop-filter:blur(24px);
+  box-shadow:0 40px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04);
+}
+.panel-head{
+  padding:16px 24px;
+  border-bottom:1px solid var(--bdr);
+  background:rgba(255,77,0,.05);
+  display:flex;align-items:center;gap:8px;
+}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--or);
+  box-shadow:0 0 8px var(--or);animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
+.panel-head span{font-size:.7rem;font-weight:700;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--or);}
+.panel-body{padding:24px;}
+.panel-label{font-size:.65rem;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.metric-big{
+  font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;
+  color:var(--white);line-height:1;margin-bottom:4px;
+}
+.metric-sub{font-size:.78rem;color:var(--muted);margin-bottom:0;}
+.panel-div{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);margin:18px 0;}
+.wrow{display:flex;align-items:center;justify-content:space-between;
+  padding:9px 0;border-bottom:1px solid rgba(255,255,255,.025);font-size:.83rem;}
+.wrow:last-child{border:none;}
+.wname{color:var(--silver);}
+.wcost{font-family:'Syne',sans-serif;font-weight:700;color:var(--red);font-size:.88rem;}
+.panel-footer{
+  padding:16px 24px;
+  background:rgba(48,209,88,.04);
+  border-top:1px solid rgba(48,209,88,.08);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.pf-label{font-size:.7rem;color:var(--muted);}
+.pf-val{font-family:'Syne',sans-serif;font-weight:800;color:var(--green);font-size:1.05rem;}
+
+/* ── SECTION: PROBLEMA ── */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+.card{
+  background:var(--card);border:1px solid var(--bdr);border-radius:10px;
+  padding:36px;backdrop-filter:blur(20px);
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+}
+.card:hover{border-color:rgba(255,255,255,.1);transform:translateY(-3px);}
+.card-or{border-color:var(--bdr-or);}
+.card-or:hover{border-color:rgba(255,77,0,.35);}
+
+.chk{display:flex;gap:10px;align-items:flex-start;padding:9px 0;
+  border-bottom:1px solid rgba(255,255,255,.03);font-size:.88rem;}
+.chk:last-child{border:none;}
+.chk-ic{flex-shrink:0;font-size:.75rem;margin-top:2px;}
+.bad .chk-ic{color:var(--red);}
+.good .chk-ic{color:var(--green);}
+.bad .chk-txt{color:rgba(255,255,255,.55);}
+.good .chk-txt{color:rgba(255,255,255,.82);}
+
+/* ── MANIFESTO ── */
+.manifesto{padding:80px 0;text-align:center;}
+.man-inner{max-width:760px;margin:0 auto;}
+.hline{display:flex;align-items:center;gap:18px;margin:32px 0;}
+.hline::before,.hline::after{content:'';flex:1;height:1px;}
+.hline::before{background:linear-gradient(90deg,transparent,rgba(255,255,255,.06));}
+.hline::after{background:linear-gradient(90deg,rgba(255,255,255,.06),transparent);}
+.diamond{width:5px;height:5px;background:var(--or);transform:rotate(45deg);}
+blockquote{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.3rem,2.4vw,2rem);font-weight:700;
+  line-height:1.3;color:var(--white);letter-spacing:-.02em;
+  margin-bottom:18px;
+}
+blockquote em{font-style:normal;color:var(--or);}
+.man-attr{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+
+/* ── BOSS OS LAYERS ── */
+.os-bg{background:rgba(4,4,4,.6);}
+.os-head{max-width:520px;margin-bottom:16px;}
+.layers{border:1px solid var(--bdr);border-radius:10px;overflow:hidden;margin-top:40px;}
+.layer{
+  display:grid;grid-template-columns:70px 1fr 90px;
+  border-bottom:1px solid var(--bdr);
+  background:rgba(8,8,8,.8);
+  transition:background .3s;
+}
+.layer:last-child{border:none;}
+.layer:hover{background:rgba(255,77,0,.04);}
+.l-num{
+  display:flex;align-items:center;justify-content:center;
+  border-right:1px solid var(--bdr);
+  font-family:'Syne',sans-serif;font-size:.65rem;font-weight:800;
+  letter-spacing:2px;color:var(--or);
+}
+.l-body{padding:24px 28px;}
+.l-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;
+  color:var(--white);margin-bottom:5px;}
+.l-desc{font-size:.83rem;color:var(--muted);line-height:1.5;margin:0;}
+.l-badge{
+  display:flex;align-items:center;justify-content:center;
+  border-left:1px solid var(--bdr);
+  font-size:.62rem;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--or);text-align:center;
+  padding:0 8px;
+}
+
+/* ── COMPARE ── */
+.cmp{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--bdr);
+  border-radius:10px;overflow:hidden;margin-top:32px;}
+.cmp-head{padding:14px 20px;font-size:.7rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;}
+.cmp-head.bad{background:rgba(255,59,48,.07);color:var(--red);
+  border-bottom:1px solid rgba(255,59,48,.12);}
+.cmp-head.good{background:rgba(48,209,88,.05);color:var(--green);
+  border-bottom:1px solid rgba(48,209,88,.1);}
+.ci{padding:12px 20px;font-size:.84rem;font-weight:500;
+  border-bottom:1px solid rgba(255,255,255,.03);
+  display:flex;align-items:center;gap:8px;}
+.ci:last-child{border:none;}
+.ci.bad{background:rgba(255,59,48,.025);color:rgba(255,255,255,.5);}
+.ci.bad::before{content:'✕';color:var(--red);font-size:.7rem;opacity:.65;flex-shrink:0;}
+.ci.good{background:rgba(48,209,88,.025);color:rgba(255,255,255,.78);}
+.ci.good::before{content:'✓';color:var(--green);font-size:.75rem;opacity:.75;flex-shrink:0;}
+
+/* ── FORM ── */
+.form-wrap{max-width:700px;margin:0 auto;}
+.form-head{text-align:center;margin-bottom:48px;}
+.form-head p{color:var(--silver);max-width:440px;margin:0 auto;}
+.fbox{
+  background:rgba(6,6,6,.92);border:1px solid var(--bdr);
+  border-radius:14px;padding:52px;
+  position:relative;overflow:hidden;
+  box-shadow:0 40px 80px rgba(0,0,0,.5);
+}
+.fbox::before{
+  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,77,0,.35),transparent);
+}
+.ilabel{
+  display:block;font-size:.68rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.55);margin-bottom:8px;
+}
+input,textarea,select{
+  width:100%;background:rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.07);border-radius:6px;
+  padding:14px 18px;color:var(--white);
+  font-family:'Inter',sans-serif;font-size:.93rem;outline:none;
+  transition:all .28s ease;
+  appearance:none;-webkit-appearance:none;
+}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  background-size:13px;padding-right:40px;
+}
+select option{background:#111;color:var(--white);}
+input:focus,textarea:focus,select:focus{
+  border-color:var(--or);background:rgba(0,0,0,.65);
+  box-shadow:0 0 0 3px rgba(255,77,0,.07);
+}
+::placeholder{color:#3a3a3a;opacity:1;}
+textarea{resize:vertical;min-height:120px;}
+.fg{display:grid;gap:20px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.sub-btn{
+  width:100%;margin-top:4px;background:var(--or);color:var(--white);
+  font-family:'Syne',sans-serif;font-weight:800;font-size:.82rem;
+  letter-spacing:2px;text-transform:uppercase;
+  padding:18px;border-radius:6px;border:none;cursor:pointer;
+  transition:all .35s cubic-bezier(.16,1,.3,1);
+}
+.sub-btn:hover{transform:translateY(-2px);box-shadow:0 18px 48px rgba(255,77,0,.32);filter:brightness(1.08);}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid rgba(255,255,255,.04);padding:36px 0;}
+.ft{display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.ft-logo{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:var(--white);}
+.ft-copy{font-size:.75rem;color:var(--muted);}
+.ft-ig{font-size:.75rem;color:var(--muted);text-decoration:none;}
+.ft-ig:hover{color:var(--or);}
+
+/* ── GOLD ACCENT TAG ── */
+.tag-gold{
+  display:inline-block;
+  background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(232,203,110,.06));
+  border:1px solid var(--bdr-gold);
+  color:var(--gold2);
+  font-size:.72rem;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;padding:5px 14px;border-radius:40px;
+  margin-bottom:16px;
+}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(22px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
+.rv.on{opacity:1;transform:translateY(0);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1020px){
+  .hero-grid{grid-template-columns:1fr;gap:48px;}
+  .two{grid-template-columns:1fr;}
+  .cmp{grid-template-columns:1fr;}
+  .cmp-head.bad,.ci.bad{display:none;}
+  .ft{flex-direction:column;text-align:center;}
+}
+@media(max-width:620px){
+  .w{padding:0 22px;}
+  section{padding:72px 0;}
+  .fbox{padding:28px 20px;}
+  .frow{grid-template-columns:1fr;}
+  .layer{grid-template-columns:56px 1fr;}
+  .l-badge{display:none;}
+  h1{font-size:2.2rem;}
+}
+</style>
 </head>
 <body>
+<div id="bar"></div>
+<div class="grid-bg"></div>
+<div class="gl gl1"></div>
+<div class="gl gl2"></div>
+<div class="gl gl3"></div>
 
-<!-- Elementos de Atmosfera Premium -->
-<div class="scroll-progress" id="progressBar"></div>
-<div class="noise"></div>
-<div class="ambient-glow-1"></div>
-<div class="ambient-glow-2"></div>
-<div class="ambient-glow-3"></div>
-
-<!-- HERO SECTION -->
+<!-- ══ HERO ══ -->
 <section class="hero">
-    <div class="container hero-grid">
+<div class="w">
+<div class="hero-grid">
 
-        <div class="reveal">
-            <span class="badge">Diagnóstico Estratégico</span>
-
-            <h1>
-                O problema não é apenas vender.<br>
-                <span class="highlight-orange">É sobreviver a um mercado que esmaga margens.</span>
-            </h1>
-
-            <p>
-                Enquanto impostos aumentam, custos sobem, burocracias crescem e grandes estruturas ficam cada vez mais pesadas...
-            </p>
-
-            <p>
-                pequenos negócios continuam sendo forçados a operar com processos lentos, equipes sobrecarregadas, ferramentas caras e operações que dependem totalmente do dono.
-            </p>
-
-            <div class="quote">
-                O mercado vende crescimento.<br>
-                Mas quase ninguém fala sobre preservar margem.
-            </div>
-
-            <a href="#diagnostico" class="cta">
-                <span>RECEBER DIAGNÓSTICO GRATUITO 
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </span>
-            </a>
-        </div>
-
-        <div class="card reveal" style="transition-delay: 0.15s;">
-            <h3 style="color: var(--orange);">Hoje, contratar mais já não resolve.</h3>
-
-            <div class="list list-negative">
-                <div>Mais pessoas.</div>
-                <div>Mais sistemas.</div>
-                <div>Mais mensalidades.</div>
-                <div>Mais burocracia.</div>
-                <div>Mais complexidade.</div>
-            </div>
-
-            <div class="divider"></div>
-
-            <p style="color: var(--white); font-weight: 600;">
-                Empresas inteligentes estão fazendo o contrário:
-            </p>
-
-            <div class="list list-positive">
-                <div>Operações mais enxutas.</div>
-                <div>Menos desperdício.</div>
-                <div>Mais velocidade.</div>
-                <div>Mais organização.</div>
-                <div>Mais adaptação.</div>
-            </div>
-        </div>
-
+  <div class="rv">
+    <span class="eye">Boss Curiosidades</span>
+    <div class="headline-tape">
+      <h1>
+        Seu negócio<br>
+        está <span class="em-or">sangrando</span><br>
+        sem você ver.
+      </h1>
     </div>
+    <p>
+      Não é problema de venda. É a sua operação consumindo <span class="em-wh">tempo, dinheiro e energia</span> que você nunca vai recuperar — até alguém mapear exatamente onde está o vazamento.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-n">+40%</div>
+        <div class="stat-d">de capacidade recuperável média nos negócios que diagnosticamos</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">3–5h</div>
+        <div class="stat-d">desperdiçadas pelo dono por semana em tarefas que não precisam dele</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">90 dias</div>
+        <div class="stat-d">para um sistema enxuto operar sem você no centro de tudo</div>
+      </div>
+    </div>
+
+    <a href="#diagnostico" class="btn">
+      Quero meu diagnóstico gratuito
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+  <!-- Panel -->
+  <div class="panel rv" style="transition-delay:.2s">
+    <div class="panel-head">
+      <div class="dot"></div>
+      <span>Diagnóstico ativo</span>
+    </div>
+    <div class="panel-body">
+      <p class="panel-label">Custo oculto semanal estimado</p>
+      <div class="metric-big">+40% da margem</div>
+      <p class="metric-sub">em horas do dono em atividades de baixo valor</p>
+      <div class="panel-div"></div>
+      <p class="panel-label">Vazamentos identificados</p>
+      <div class="wrow"><span class="wname">Cobranças sem automação</span><span class="wcost">alto</span></div>
+      <div class="wrow"><span class="wname">Follow-up manual de clientes</span><span class="wcost">alto</span></div>
+      <div class="wrow"><span class="wname">Retrabalho administrativo</span><span class="wcost">médio</span></div>
+      <div class="wrow"><span class="wname">Agenda sem sistema</span><span class="wcost">médio</span></div>
+    </div>
+    <div class="panel-footer">
+      <span class="pf-label">Potencial de recuperação</span>
+      <span class="pf-val">até +60% de capacidade</span>
+    </div>
+  </div>
+
+</div>
+</div>
 </section>
 
-<!-- SEÇÃO 2: NOVO CENÁRIO -->
+<!-- ══ PROBLEMA ══ -->
 <section>
-    <div class="container section-grid">
+<div class="w">
+  <div class="rv" style="max-width:580px;margin-bottom:48px;">
+    <span class="eye">O problema invisível</span>
+    <h2>Você tem um negócio ou tem um emprego disfarçado de empresa?</h2>
+    <p>Quando qualquer coisa fora do padrão precisa de você para resolver, a empresa não cresce — ela consome.</p>
+  </div>
 
-        <div class="card reveal">
-            <span class="badge">Novo cenário</span>
-
-            <h2>
-                Empresas eficientes estão substituindo empresas pesadas.
-            </h2>
-
-            <p>
-                Qualquer negócio continua tentando resolver desorganização contratando mais pessoas...
-            </p>
-
-            <p>
-                outros estão simplificando operações, reduzindo atrito, eliminando desperdícios e automatizando tarefas repetitivas.
-            </p>
-
-            <div class="quote">
-                Empresas lentas estão pagando mais caro para crescer menos.
-            </div>
-        </div>
-
-        <div class="card reveal" style="transition-delay: 0.15s;">
-            <span class="badge">Problema do mercado</span>
-
-            <h2>
-                O mercado complicou aquilo que deveria simplificar.
-            </h2>
-
-            <div class="list list-negative">
-                <div>Sistemas gigantes.</div>
-                <div>Implementações demoradas.</div>
-                <div>Contratos longos.</div>
-                <div>Ferramentas caras.</div>
-                <div>Dependência técnica.</div>
-            </div>
-
-            <div class="divider"></div>
-
-            <p>
-                Muitas empresas acabam pagando por complexidade que nem precisavam ter.
-            </p>
-        </div>
-
+  <div class="two rv" style="transition-delay:.1s">
+    <div class="card card-or">
+      <h3 style="color:var(--red)">O ciclo que trava tudo</h3>
+      <p style="font-size:.88rem;margin-bottom:16px">Cada cliente novo aumenta a demanda operacional. Mas a solução contratada pelo mercado sempre foi a mesma: <em>contrata mais uma pessoa.</em></p>
+      <div class="bad">
+        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">Mais pessoas → mais custo → margens menores</span></div>
+        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">Mais ferramentas → mais complexidade → mais tempo gerindo</span></div>
+        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">Mais esforço → mesma estrutura quebrada → mesmo resultado</span></div>
+        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">O gargalo continua sendo você</span></div>
+      </div>
     </div>
+
+    <div class="card">
+      <h3 style="color:var(--green)">O que negócios eficientes fazem diferente</h3>
+      <p style="font-size:.88rem;margin-bottom:16px">Não crescem adicionando pessoas ao caos. Primeiro redesenham o sistema — depois automatizam o que faz sentido.</p>
+      <div class="good">
+        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Operação funciona sem o dono no centro</span></div>
+        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Automação sobre processo saudável — não sobre caos</span></div>
+        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Visibilidade de onde o dinheiro vai de verdade</span></div>
+        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Cresce a capacidade — sem crescer a complexidade</span></div>
+      </div>
+    </div>
+  </div>
+</div>
 </section>
 
-<!-- SEÇÃO 3: ESTRUTURA INTELIGENTE -->
-<section>
-    <div class="container section-grid">
-
-        <div class="card reveal">
-            <span class="badge">Estrutura Inteligente</span>
-
-            <h2>
-                Operações modernas não precisam ser gigantes.
-            </h2>
-
-            <p>
-                A lógica mudou.
-            </p>
-
-            <p>
-                Não vence quem possui a estrutura mais pesada.
-            </p>
-
-            <p>
-                Vence quem se adapta mais rápido, reduz atrito operacional e mantém margem mesmo em mercados pressionados.
-            </p>
-        </div>
-
-        <div class="card reveal" style="transition-delay: 0.15s;">
-            <span class="badge">Vivência real</span>
-
-            <h2>
-                A maioria fala sobre tecnologia.<br>
-                Poucos entendem a realidade operacional do mercado.
-            </h2>
-
-            <p>
-                Quem vive o mercado sabe onde empresas travam, onde dinheiro é desperdiçado e onde processos começam a sufocar crescimento.
-            </p>
-
-            <div class="quote">
-                Os maiores gargalos normalmente não estão na venda.<br>
-                Estão na operação invisível do dia a dia.
-            </div>
-        </div>
-
-    </div>
+<!-- ══ MANIFESTO ══ -->
+<section class="manifesto">
+<div class="w">
+  <div class="man-inner rv">
+    <div class="hline"><div class="diamond"></div></div>
+    <blockquote>
+      "O mercado vendeu ferramentas.<br>
+      Nós instalamos <em>sistemas</em>.<br>
+      A diferença mora na sua margem."
+    </blockquote>
+    <p class="man-attr">— Filosofia Boss OS</p>
+    <div class="hline"><div class="diamond"></div></div>
+  </div>
+</div>
 </section>
 
-<!-- SEÇÃO FORMULÁRIO COM INTEGRAÇÃO REAL COM O GOOGLE FORMS -->
+<!-- ══ BOSS OS ══ -->
+<section class="os-bg">
+<div class="w">
+  <div class="rv os-head">
+    <span class="tag-gold">Metodologia Proprietária</span>
+    <h2>BOSS OS<br><span style="font-size:1rem;font-weight:400;color:var(--muted);font-family:'Inter'">Business Operating System</span></h2>
+    <p>Não vendemos automação avulsa. Entregamos o sistema operacional completo do seu negócio — desenhado antes de qualquer ferramenta ser tocada.</p>
+  </div>
+
+  <div class="layers rv" style="transition-delay:.1s">
+    <div class="layer">
+      <div class="l-num">01</div>
+      <div class="l-body">
+        <div class="l-title">Diagnóstico de Fluxo</div>
+        <p class="l-desc">Mapeamos onde seu tempo está sendo destruído, onde clientes somem e onde o dinheiro vaza sem você perceber. Tudo quantificado.</p>
+      </div>
+      <div class="l-badge">Diagnóstico</div>
+    </div>
+    <div class="layer">
+      <div class="l-num">02</div>
+      <div class="l-body">
+        <div class="l-title">Arquitetura Enxuta</div>
+        <p class="l-desc">Redesenhamos os processos críticos. Eliminamos etapas que existem por hábito, não por necessidade. Estado futuro documentado e claro.</p>
+      </div>
+      <div class="l-badge">Engenharia</div>
+    </div>
+    <div class="layer">
+      <div class="l-num">03</div>
+      <div class="l-body">
+        <div class="l-title">Automação Robusta</div>
+        <p class="l-desc">Implementação técnica sobre a arquitetura saudável. A ferramenta serve o sistema — nunca o contrário. IA onde gera retorno real.</p>
+      </div>
+      <div class="l-badge">Execução</div>
+    </div>
+    <div class="layer">
+      <div class="l-num">04</div>
+      <div class="l-body">
+        <div class="l-title">Inteligência Operacional</div>
+        <p class="l-desc">Dashboard que mostra em tempo real onde o negócio está saudável e onde está sangrando. Decisão baseada em dado — não em sensação.</p>
+      </div>
+      <div class="l-badge">Visibilidade</div>
+    </div>
+  </div>
+
+  <div class="cmp rv" style="transition-delay:.15s">
+    <div class="cmp-head bad">Abordagem comum do mercado</div>
+    <div class="cmp-head good">Abordagem BOSS OS</div>
+    <div class="ci bad">Vende ferramenta, não sistema</div>
+    <div class="ci good">Projeta sistema antes de qualquer ferramenta</div>
+    <div class="ci bad">Automação sobre processo quebrado</div>
+    <div class="ci good">Engenharia de processo primeiro</div>
+    <div class="ci bad">Entrega e desaparece</div>
+    <div class="ci good">Operação assistida até estabilizar</div>
+    <div class="ci bad">Nenhum indicador de retorno</div>
+    <div class="ci good">Dashboard de impacto mensurável</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ DIAGNÓSTICO / FORM ══ -->
 <section id="diagnostico">
-    <div class="container">
-
-        <div class="card reveal" style="padding: 10px; border: none; background: transparent; backdrop-filter: none;">
-            <div style="text-align: center; max-width: 700px; margin: 0 auto 20px auto;">
-                <span class="badge">Diagnóstico Operacional</span>
-                <h2 style="margin-bottom: 20px;">Crescer sem eficiência virou risco.</h2>
-                <p>Receba uma análise estratégica para identificar gargalos invisíveis, desperdícios operacionais e pontos que podem estar reduzindo sua margem sem perceber.</p>
-            </div>
-
-            <div class="form-box">
-                <h3>Solicitar diagnóstico gratuito</h3>
-                <p class="form-subtitle">Preencha os dados abaixo com atenção para iniciarmos a análise estrutural</p>
-
-                <!-- Formulário Conectado Oficialmente com o Google Forms fornecido -->
-                <form action="https://docs.google.com/forms/d/e/1FAIpQLSe79keCIYkL7hmtyzNdzFUFHGEG_K9loHBrjW2sNSm2_r7yQA/formResponse" method="POST" target="hidden_iframe" id="lpForm">
-
-                    <!-- Pergunta: Qual seu nome? -->
-                    <div class="input-group">
-                        <label class="input-label">Qual seu nome?</label>
-                        <input type="text" name="entry.678677076" placeholder="Escreva seu nome completo" required>
-                    </div>
-
-                    <!-- Pergunta: Qual é o número de WhatsApp? -->
-                    <div class="input-group">
-                        <label class="input-label">Qual é o número de WhatsApp?</label>
-                        <input type="tel" name="entry.1554549533" placeholder="(00) 99999-9999" required>
-                    </div>
-
-                    <!-- Pergunta: Coloque seu melhor e-mail: -->
-                    <div class="input-group">
-                        <label class="input-label">Coloque seu melhor e-mail:</label>
-                        <input type="email" name="entry.948827469" placeholder="exemplo@empresa.com" required>
-                    </div>
-
-                    <!-- Pergunta: Rede Social do Negócio (LinkedIn ou Instagram): -->
-                    <div class="input-group">
-                        <label class="input-label">Rede Social do Negócio (LinkedIn ou Instagram):</label>
-                        <input type="text" name="entry.436339199" placeholder="@usuario ou link do perfil" required>
-                    </div>
-
-                    <!-- Pergunta: Qual é seu principal objetivo ou ambição agora? -->
-                    <div class="input-group">
-                        <label class="input-label">Qual é seu principal objetivo ou ambição agora?</label>
-                        <select name="entry.1427730301" required>
-                            <option value="" disabled selected>Selecione seu principal objetivo</option>
-                            <option value="Processos lentos">Processos lentos</option>
-                            <option value="Perda de clientes">Perda de clientes</option>
-                            <option value="Falta de organização">Falta de organização</option>
-                            <option value="Excesso de tarefas manuais">Excesso de tarefas manuais</option>
-                            <option value="Equipe sobrecarregada">Equipe sobrecarregada</option>
-                            <option value="Custos operacionais altos">Custos operacionais altos</option>
-                        </select>
-                    </div>
-
-                    <!-- Pergunta: Por que você acredita que este é o momento certo para escalarmos sua estrutura? -->
-                    <div class="input-group">
-                        <label class="input-label">Por que você acredita que este é o momento certo para escalarmos sua estrutura?</label>
-                        <textarea name="entry.687557737" placeholder="Descreva brevemente sua operação ou principal gargalo" required></textarea>
-                    </div>
-
-                    <button type="submit" id="submitBtn">
-                        RECEBER DIAGNÓSTICO GRATUITO
-                    </button>
-                </form>
-
-                <!-- Iframe Oculto para evitar redirecionamento feio do Google Forms -->
-                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-            </div>
-        </div>
-
+<div class="w">
+  <div class="form-wrap">
+    <div class="form-head rv">
+      <span class="eye">Diagnóstico Operacional Gratuito</span>
+      <h2>Descubra onde sua<br>operação está sangrando.</h2>
+      <p>30 minutos de análise. Identificamos os gargalos invisíveis que estão destruindo sua margem — sem pitch, sem proposta. Só diagnóstico.</p>
     </div>
+
+    <div class="fbox rv" style="transition-delay:.12s">
+      <form action="https://docs.google.com/forms/d/e/1FAIpQLSe79keCIYkL7hmtyzNdzFUFHGEG_K9loHBrjW2sNSm2_r7yQA/formResponse" method="POST" target="hidden_iframe" id="lpForm">
+        <div class="fg">
+
+          <div class="frow">
+            <div>
+              <label class="ilabel">Qual seu nome?</label>
+              <input type="text" name="entry.678677076" placeholder="Nome completo" required>
+            </div>
+            <div>
+              <label class="ilabel">WhatsApp</label>
+              <input type="tel" name="entry.1554549533" placeholder="(51) 99999-9999" required>
+            </div>
+          </div>
+
+          <div>
+            <label class="ilabel">Melhor e-mail</label>
+            <input type="email" name="entry.948827469" placeholder="seuemail@empresa.com" required>
+          </div>
+
+          <div>
+            <label class="ilabel">Rede Social do Negócio (LinkedIn ou Instagram)</label>
+            <input type="text" name="entry.436339199" placeholder="@usuario ou link do perfil" required>
+          </div>
+
+          <div>
+            <label class="ilabel">Qual é seu principal objetivo ou ambição agora?</label>
+            <select name="entry.1427730301" required>
+              <option value="" disabled selected>Selecione o maior gargalo atual</option>
+              <option value="Processos lentos">Processos lentos</option>
+              <option value="Perda de clientes">Perda de clientes</option>
+              <option value="Falta de organização">Falta de organização</option>
+              <option value="Excesso de tarefas manuais">Excesso de tarefas manuais</option>
+              <option value="Equipe sobrecarregada">Equipe sobrecarregada</option>
+              <option value="Custos operacionais altos">Custos operacionais altos</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="ilabel">Por que você acredita que este é o momento certo para escalarmos sua estrutura?</label>
+            <textarea name="entry.687557737" placeholder="Descreva brevemente sua operação ou principal gargalo" required></textarea>
+          </div>
+
+          <button type="submit" class="sub-btn" id="submitBtn">
+            Solicitar diagnóstico gratuito →
+          </button>
+        </div>
+      </form>
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+    </div>
+  </div>
+</div>
 </section>
 
-<!-- FOOTER -->
+<!-- ══ FOOTER ══ -->
 <footer>
-    © Boss Curiosidades — Estruturas Inteligentes para Negócios Modernos.
+<div class="w">
+  <div class="ft">
+    <span class="ft-logo">BOSS CURIOSIDADES</span>
+    <span class="ft-copy">© 2026 — Estruturas Inteligentes para Negócios Modernos</span>
+    <a href="https://instagram.com/boss.curiosidades" target="_blank" class="ft-ig">@boss.curiosidades</a>
+  </div>
+</div>
 </footer>
 
-<!-- SCRIPTS PREMIUM: ANIMAÇÃO DE SCROLL E PROGRESSO -->
 <script>
-    // 1. Barra de progresso de leitura dinâmica
-    window.addEventListener('scroll', () => {
-        const winScroll = document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        document.getElementById('progressBar').style.width = scrolled + '%';
-    });
+// Progress bar
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('bar').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+});
 
-    // 2. Observer Avançado para Efeito Clean de Fade In + Subida suave dos elementos
-    const revealOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-    };
+// Reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
+},{threshold:.07,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Executa apenas uma vez para performance
-            }
-        });
-    }, revealOptions);
-
-    document.querySelectorAll('.reveal').forEach(el => {
-        revealObserver.observe(el);
-    });
-
-    // 3. Feedback visual e reset elegante ao enviar o formulário
-    const form = document.getElementById('lpForm');
-    const iframe = document.getElementById('hidden_iframe');
-    const btn = document.getElementById('submitBtn');
-
-    form.addEventListener('submit', () => {
-        btn.innerText = "ENVIANDO SEUS DADOS...";
-        btn.style.pointerEvents = "none";
-        btn.style.opacity = "0.7";
-    });
-
-    iframe.addEventListener('load', () => {
-        // Quando o iframe carrega após o post do form
-        if (btn.innerText === "ENVIANDO SEUS DADOS...") {
-            btn.innerText = "DIAGNÓSTICO SOLICITADO COM SUCESSO!";
-            btn.style.background = "linear-gradient(135deg, #34c759 0%, #28a745 100%)";
-            btn.style.boxShadow = "0 15px 35px rgba(52, 199, 89, 0.2)";
-            form.reset();
-            setTimeout(() => {
-                btn.innerText = "RECEBER DIAGNÓSTICO GRATUITO";
-                btn.style.background = "linear-gradient(135deg, var(--orange) 0%, var(--orange-glow) 100%)";
-                btn.style.boxShadow = "0 15px 35px rgba(255, 77, 0, 0.2)";
-                btn.style.pointerEvents = "auto";
-                btn.style.opacity = "1";
-            }, 5000);
-        }
-    });
+// Form
+const form=document.getElementById('lpForm');
+const btn=document.getElementById('submitBtn');
+const iframe=document.getElementById('hidden_iframe');
+form.addEventListener('submit',()=>{
+  btn.textContent='Enviando...';btn.style.opacity='.6';btn.style.pointerEvents='none';
+});
+iframe.addEventListener('load',()=>{
+  if(btn.textContent==='Enviando...'){
+    btn.textContent='Diagnóstico solicitado com sucesso ✓';
+    btn.style.background='linear-gradient(135deg,#30D158,#28a745)';
+    btn.style.opacity='1';form.reset();
+    setTimeout(()=>{
+      btn.textContent='Solicitar diagnóstico gratuito →';
+      btn.style.background='var(--or)';btn.style.pointerEvents='auto';
+    },6000);
+  }
+});
 </script>
-
 </body>
 </html>
