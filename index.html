@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boss Curiosidades | BOSS OS</title>
+<title>DBB Soluções Empresariais | Automação & IA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#04030a;
-  --or:#FF4D00;--or2:#FF6928;
+  --bg:#0a0405;
+  --or:#8A2332;--or2:#B23A4E;
   --gold:#C9A84C;--gold2:#E8CB6E;--gold3:#F5DFA0;
   --sv:#9a9a9a;--wh:#fff;--mt:#4a4a4a;
   --card:rgba(8,6,18,.8);
   --b0:rgba(255,255,255,.04);
-  --bor:rgba(255,77,0,.18);
+  --bor:rgba(138,35,50,.22);
   --bog:rgba(201,168,76,.15);
   --red:#FF3B30;--gr:#30D158;
 }
@@ -40,11 +40,11 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
 /* ─── AMBIENT GLOWS ─── */
 .gl{position:fixed;pointer-events:none;z-index:0;border-radius:50%;}
 .gl1{width:700px;height:700px;top:-120px;right:-100px;
-  background:radial-gradient(circle,rgba(255,77,0,.07) 0%,transparent 65%);filter:blur(90px);}
+  background:radial-gradient(circle,rgba(138,35,50,.07) 0%,transparent 65%);filter:blur(90px);}
 .gl2{width:900px;height:900px;top:45%;left:-250px;
   background:radial-gradient(circle,rgba(201,168,76,.04) 0%,transparent 65%);filter:blur(120px);}
 .gl3{width:600px;height:600px;bottom:-80px;right:5%;
-  background:radial-gradient(circle,rgba(255,77,0,.05) 0%,transparent 65%);filter:blur(80px);}
+  background:radial-gradient(circle,rgba(138,35,50,.05) 0%,transparent 65%);filter:blur(80px);}
 
 /* ─── CANVAS PARTICLE BG ─── */
 #particles{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.45;}
@@ -116,12 +116,12 @@ p{font-size:.93rem;font-weight:300;line-height:1.78;margin-bottom:14px;letter-sp
   border:none;cursor:pointer;position:relative;}
 .btn::before{content:'';position:absolute;inset:0;
   border:.5px solid var(--gold);
-  background:linear-gradient(135deg,rgba(201,168,76,.06),rgba(255,77,0,.04));
+  background:linear-gradient(135deg,rgba(201,168,76,.06),rgba(138,35,50,.04));
   transition:all .4s cubic-bezier(.16,1,.3,1);}
 .btn::after{content:'';position:absolute;bottom:-1px;left:10%;right:10%;height:.5px;
   background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 .btn span{position:relative;z-index:1;display:flex;align-items:center;gap:10px;}
-.btn:hover::before{background:linear-gradient(135deg,rgba(201,168,76,.14),rgba(255,77,0,.1));
+.btn:hover::before{background:linear-gradient(135deg,rgba(201,168,76,.14),rgba(138,35,50,.1));
   border-color:var(--gold2);box-shadow:0 0 40px rgba(201,168,76,.08),0 20px 60px rgba(0,0,0,.4);}
 .btn:hover{color:var(--wh);}
 .btn:hover .arrow{transform:translateX(5px);}
@@ -139,10 +139,10 @@ p{font-size:.93rem;font-weight:300;line-height:1.78;margin-bottom:14px;letter-sp
   background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),transparent);}
 .panel-head{padding:14px 22px;
   border-bottom:.5px solid rgba(255,255,255,.04);
-  background:rgba(255,77,0,.04);
+  background:rgba(138,35,50,.04);
   display:flex;align-items:center;gap:8px;}
 .dot{width:5px;height:5px;border-radius:50%;background:var(--or);
-  box-shadow:0 0 6px var(--or),0 0 12px rgba(255,77,0,.4);
+  box-shadow:0 0 6px var(--or),0 0 12px rgba(138,35,50,.4);
   animation:blink 2.4s ease-in-out infinite;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
 .ph-text{font-size:.65rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--or);}
@@ -177,8 +177,8 @@ p{font-size:.93rem;font-weight:300;line-height:1.78;margin-bottom:14px;letter-sp
   transition:border-color .5s;}
 .card:hover::before{border-color:rgba(201,168,76,.12);}
 .card:hover{transform:translateY(-3px);}
-.card-or::before{border-color:rgba(255,77,0,.12);}
-.card-or:hover::before{border-color:rgba(255,77,0,.25);}
+.card-or::before{border-color:rgba(138,35,50,.12);}
+.card-or:hover::before{border-color:rgba(138,35,50,.25);}
 
 /* top accent line on cards */
 .card::after{content:'';position:absolute;top:0;left:20%;right:20%;height:.5px;
@@ -210,7 +210,7 @@ blockquote{font-family:'Cormorant Garamond',serif;
 blockquote em{font-style:normal;font-weight:500;color:var(--gold2);}
 .man-attr{font-size:.68rem;letter-spacing:3.5px;text-transform:uppercase;color:var(--mt);}
 
-/* ─── BOSS OS ─── */
+/* ─── DBB OS ─── */
 .os-bg{background:linear-gradient(180deg,transparent,rgba(3,2,8,.5),transparent);}
 .os-head{max-width:600px;margin-bottom:12px;}
 
@@ -371,13 +371,13 @@ textarea{resize:vertical;min-height:110px;}
   transition:all .4s cubic-bezier(.16,1,.3,1);
 }
 .sub-btn::before{content:'';position:absolute;inset:0;
-  border:.5px solid rgba(255,77,0,.4);
-  background:linear-gradient(135deg,rgba(255,77,0,.08),rgba(201,168,76,.04));
+  border:.5px solid rgba(138,35,50,.4);
+  background:linear-gradient(135deg,rgba(138,35,50,.08),rgba(201,168,76,.04));
   transition:all .4s cubic-bezier(.16,1,.3,1);}
 .sub-btn::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:.5px;
   background:linear-gradient(90deg,transparent,var(--or),var(--gold),transparent);}
-.sub-btn:hover::before{background:linear-gradient(135deg,rgba(255,77,0,.16),rgba(201,168,76,.08));
-  border-color:var(--or);box-shadow:0 0 50px rgba(255,77,0,.12),0 20px 60px rgba(0,0,0,.4);}
+.sub-btn:hover::before{background:linear-gradient(135deg,rgba(138,35,50,.16),rgba(201,168,76,.08));
+  border-color:var(--or);box-shadow:0 0 50px rgba(138,35,50,.12),0 20px 60px rgba(0,0,0,.4);}
 .sub-btn span{position:relative;z-index:1;}
 
 /* ─── FOOTER ─── */
@@ -429,29 +429,29 @@ footer{border-top:.5px solid rgba(255,255,255,.04);padding:34px 0;}
 <div class="hero-grid">
 
   <div class="rv">
-    <span class="eye">Boss Curiosidades</span>
+    <span class="eye">DBB Soluções Empresariais</span>
     <div class="headline-tape">
       <h1>
-        Seu negócio está<br>
-        <strong class="em-or">sangrando</strong><br>
-        <span style="font-weight:300;font-style:italic">sem você ver.</span>
+        Sua empresa paga<br>
+        <strong class="em-or">trabalho manual</strong><br>
+        <span style="font-weight:300;font-style:italic">que a IA já faria.</span>
       </h1>
     </div>
     <div class="gold-rule-sm"></div>
-    <p>Não é problema de venda. É a sua operação consumindo <span class="em-wh">tempo, energia e margem</span> que você nunca vai recuperar — até alguém mapear exatamente onde está o vazamento.</p>
+    <p>Não é falta de esforço. É trabalho repetitivo, disperso entre planilhas e sistemas que não conversam, consumindo <span class="em-wh">tempo, dinheiro e margem</span> — até alguém desenhar os protocolos certos de automação.</p>
 
     <div class="stats">
       <div class="stat">
         <div class="stat-n">+40%</div>
-        <div class="stat-d">de capacidade recuperável média</div>
+        <div class="stat-d">de capacidade produtiva recuperável</div>
       </div>
       <div class="stat">
         <div class="stat-n">3–5h</div>
-        <div class="stat-d">do dono destruídas por semana</div>
+        <div class="stat-d">por semana perdidas em tarefas manuais</div>
       </div>
       <div class="stat">
         <div class="stat-n">90 dias</div>
-        <div class="stat-d">para operar sem você no centro</div>
+        <div class="stat-d">para rodar com protocolos automatizados</div>
       </div>
     </div>
 
@@ -470,16 +470,16 @@ footer{border-top:.5px solid rgba(255,255,255,.04);padding:34px 0;}
       <span class="ph-text">Diagnóstico ativo</span>
     </div>
     <div class="panel-body">
-      <p class="plabel">Custo oculto estimado</p>
-      <div class="metric-big">+40% da margem</div>
-      <p class="metric-sub">em horas do dono em atividades de baixo valor</p>
+      <p class="plabel">Capacidade perdida estimada</p>
+      <div class="metric-big">+40% do tempo</div>
+      <p class="metric-sub">em tarefas manuais que já poderiam ser automatizadas</p>
       <div class="pdiv"></div>
-      <p class="plabel">Vazamentos mais comuns</p>
-      <div class="wrow"><span class="wn">Estoque sem controle e capital parado</span><span class="wc">crítico</span></div>
-      <div class="wrow"><span class="wn">Gargalos operacionais em projetos</span><span class="wc">crítico</span></div>
-      <div class="wrow"><span class="wn">Leads e clientes sem follow-up/CS</span><span class="wc">crítico</span></div>
-      <div class="wrow"><span class="wn">Tarefas burocráticas manuais</span><span class="wc">alto</span></div>
-      <div class="wrow"><span class="wn">Decisões sem Business Intelligence</span><span class="wc">alto</span></div>
+      <p class="plabel">Processos mais automatizáveis</p>
+      <div class="wrow"><span class="wn">Tarefas manuais e repetitivas</span><span class="wc">crítico</span></div>
+      <div class="wrow"><span class="wn">Sistemas isolados, sem integração</span><span class="wc">crítico</span></div>
+      <div class="wrow"><span class="wn">Atendimento e follow-up sem automação</span><span class="wc">crítico</span></div>
+      <div class="wrow"><span class="wn">Relatórios e controles feitos à mão</span><span class="wc">alto</span></div>
+      <div class="wrow"><span class="wn">Decisões sem dados em tempo real</span><span class="wc">alto</span></div>
     </div>
   </div>
 
@@ -491,10 +491,10 @@ footer{border-top:.5px solid rgba(255,255,255,.04);padding:34px 0;}
 <section id="servicos">
 <div class="w">
   <div class="rv os-head">
-    <span class="tag-gold">Soluções Operacionais</span>
-    <h2>Ecossistema Integrado de <strong>Automação & Escala</strong></h2>
+    <span class="tag-gold">Áreas de Automação</span>
+    <h2>Onde a <strong>Automação & IA</strong> geram mais retorno</h2>
     <div class="gold-rule" style="opacity:.3;margin-bottom:18px;"></div>
-    <p>Conheça os pilares fundamentais que estruturam empresas para crescer com previsibilidade, lucro e sem dependência operacional do dono.</p>
+    <p>Identificamos os processos que mais consomem tempo e dinheiro na sua operação e construímos automações sob medida para executá-los com menos intervenção humana.</p>
   </div>
 
   <div class="services-grid rv" style="transition-delay:.1s">
@@ -523,7 +523,7 @@ footer{border-top:.5px solid rgba(255,255,255,.04);padding:34px 0;}
     <div class="service-card">
       <span class="service-num">03</span>
       <h3>Marketing, Comercial & CS Inteligente</h3>
-      <p>Automação do funil de vendas, nutrição de leads, pós-venda e onboarding de clientes. Conecta a atração ao sucesso do cliente sem atrito ou perdas no meio do caminho.</p>
+      <p>Automação do funil de vendas com IA, nutrição de leads, pós-venda e onboarding de clientes. Conecta a atração ao sucesso do cliente sem atrito ou perdas no meio do caminho.</p>
       <div class="service-impact">
         <strong>Importância:</strong> Maximiza o LTV (Lifetime Value), reduz o Custo de Aquisição (CAC) e garante retenção e upsell consistentes.
       </div>
@@ -543,7 +543,7 @@ footer{border-top:.5px solid rgba(255,255,255,.04);padding:34px 0;}
     <div class="service-card">
       <span class="service-num">05</span>
       <h3>Business Intelligence (BI) Operacional</h3>
-      <p>Dashboards dinâmicos e centralizados com métricas em tempo real. Transformação de dados dispersos em visões claras para tomada de decisão estratégica.</p>
+      <p>Dashboards dinâmicos e centralizados com métricas em tempo real, com IA aplicada para transformar dados dispersos em visões claras para tomada de decisão estratégica.</p>
       <div class="service-impact">
         <strong>Importância:</strong> Permite liderar com base em dados reais e não em intuição, revelando vazamentos e oportunidades instantaneamente.
       </div>
@@ -558,9 +558,9 @@ footer{border-top:.5px solid rgba(255,255,255,.04);padding:34px 0;}
 <div class="w">
   <div class="rv" style="max-width:560px;margin-bottom:52px;">
     <span class="eye">O problema invisível</span>
-    <h2>Você tem um negócio ou um <strong>emprego disfarçado</strong> de empresa?</h2>
+    <h2>Você tem uma empresa ou uma <strong>rotina manual</strong> disfarçada de negócio?</h2>
     <div class="gold-rule" style="opacity:.3;margin-bottom:18px;"></div>
-    <p>Quando qualquer coisa fora do padrão precisa de você para resolver, a empresa não cresce — ela consome.</p>
+    <p>Quando crescer significa mais gente fazendo mais tarefas à mão, a empresa não escala — ela sobrecarrega.</p>
   </div>
 
   <div class="two rv" style="transition-delay:.1s">
@@ -568,21 +568,21 @@ footer{border-top:.5px solid rgba(255,255,255,.04);padding:34px 0;}
       <h3 style="color:var(--red);font-style:italic">O ciclo que trava tudo</h3>
       <p style="font-size:.84rem;font-weight:300;margin-bottom:16px">Cada novo cliente aumenta a demanda operacional. A solução do mercado sempre foi a mesma:</p>
       <div class="bad">
-        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">Mais pessoas → mais custo → margens menores</span></div>
-        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">Mais ferramentas → mais complexidade → menos tempo</span></div>
-        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">Mais esforço → mesma estrutura quebrada</span></div>
-        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">O gargalo continua sendo você</span></div>
+        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">Mais clientes → mais tarefas manuais → mais gente</span></div>
+        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">Mais ferramentas soltas → mais retrabalho → menos controle</span></div>
+        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">Mais esforço → os mesmos processos manuais</span></div>
+        <div class="chk"><span class="chk-ic">✕</span><span class="chk-txt">O gargalo continua sendo trabalho humano repetitivo</span></div>
       </div>
     </div>
 
     <div class="card">
-      <h3 style="color:var(--gr);font-style:italic">O que negócios eficientes fazem</h3>
-      <p style="font-size:.84rem;font-weight:300;margin-bottom:16px">Não crescem adicionando pessoas ao caos. Primeiro redesenham o sistema — depois automatizam.</p>
+      <h3 style="color:var(--gr);font-style:italic">O que empresas automatizadas fazem</h3>
+      <p style="font-size:.84rem;font-weight:300;margin-bottom:16px">Não crescem adicionando pessoas ao caos. Primeiro redesenham o processo — depois automatizam com IA.</p>
       <div class="good">
-        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Operação funciona sem o dono no centro</span></div>
-        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Automação sobre processo saudável</span></div>
-        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Visibilidade real de onde o dinheiro vai</span></div>
-        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Cresce a capacidade sem crescer o caos</span></div>
+        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Processos rodam com automação, não com esforço manual</span></div>
+        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Sistemas conversam entre si — sem retrabalho</span></div>
+        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Visibilidade real de onde o tempo e o dinheiro vão</span></div>
+        <div class="chk"><span class="chk-ic">✓</span><span class="chk-txt">Cresce a capacidade sem crescer a equipe</span></div>
       </div>
     </div>
   </div>
@@ -595,47 +595,47 @@ footer{border-top:.5px solid rgba(255,255,255,.04);padding:34px 0;}
   <div class="man-inner rv">
     <div class="hline"><div class="diamond"></div></div>
     <blockquote>
-      "O mercado vendeu ferramentas.<br>
-      Nós instalamos <em>sistemas</em>.<br>
+      "O mercado vendeu ferramentas soltas.<br>
+      Nós construímos <em>automação</em>.<br>
       A diferença mora na sua margem."
     </blockquote>
-    <p class="man-attr">— Filosofia Boss OS</p>
+    <p class="man-attr">— Filosofia DBB</p>
     <div class="hline"><div class="diamond"></div></div>
   </div>
 </div>
 </section>
 
-<!-- ══ BOSS OS ══ -->
+<!-- ══ DBB OS ══ -->
 <section class="os-bg">
 <div class="w">
   <div class="rv os-head">
     <span class="tag-gold">Metodologia Proprietária</span>
-    <h2>BOSS OS<br><span style="font-size:1rem;font-weight:300;color:var(--mt);font-family:'DM Sans'">Business Operating System</span></h2>
-    <p>Não vendemos automação avulsa. Entregamos o sistema operacional completo do seu negócio — desenhado antes de qualquer ferramenta ser tocada.</p>
+    <h2>DBB OS<br><span style="font-size:1rem;font-weight:300;color:var(--mt);font-family:'DM Sans'">Sistema de Automação Operacional</span></h2>
+    <p>Não entregamos automação avulsa. Mapeamos, redesenhamos e automatizamos os processos que mais consomem tempo e dinheiro da sua operação — com IA aplicada onde faz sentido.</p>
   </div>
 
   <div class="layers rv" style="transition-delay:.1s">
     <div class="layer">
       <div class="l-num">01</div>
       <div class="l-body">
-        <div class="l-title">Diagnóstico de Fluxo</div>
-        <p class="l-desc">Mapeamos onde seu tempo está sendo destruído, onde clientes somem e onde o dinheiro vaza sem você perceber.</p>
+        <div class="l-title">Diagnóstico de Processos</div>
+        <p class="l-desc">Mapeamos as tarefas manuais que mais consomem tempo, dinheiro e atenção da sua equipe.</p>
       </div>
       <div class="l-badge">Diagnóstico</div>
     </div>
     <div class="layer">
       <div class="l-num">02</div>
       <div class="l-body">
-        <div class="l-title">Arquitetura Enxuta</div>
-        <p class="l-desc">Redesenhamos os processos críticos. Eliminamos etapas que existem por hábito — não por necessidade.</p>
+        <div class="l-title">Redesenho Enxuto</div>
+        <p class="l-desc">Eliminamos etapas manuais que existem por hábito — antes de automatizar qualquer coisa.</p>
       </div>
       <div class="l-badge">Engenharia</div>
     </div>
     <div class="layer">
       <div class="l-num">03</div>
       <div class="l-body">
-        <div class="l-title">Automação Robusta</div>
-        <p class="l-desc">Implementação técnica sobre arquitetura saudável. A ferramenta serve o sistema — nunca o contrário.</p>
+        <div class="l-title">Automação & IA Aplicada</div>
+        <p class="l-desc">Implementamos os protocolos de automação e IA sobre processos já enxutos e saudáveis.</p>
       </div>
       <div class="l-badge">Execução</div>
     </div>
@@ -643,7 +643,7 @@ footer{border-top:.5px solid rgba(255,255,255,.04);padding:34px 0;}
       <div class="l-num">04</div>
       <div class="l-body">
         <div class="l-title">Inteligência Operacional (BI)</div>
-        <p class="l-desc">Dashboard que mostra onde o negócio está saudável e onde está sangrando. Decisão em dado, não em sensação.</p>
+        <p class="l-desc">Dashboard que mostra o que já está automatizado, o que ainda é manual e onde a margem está vazando.</p>
       </div>
       <div class="l-badge">Visibilidade</div>
     </div>
@@ -651,13 +651,13 @@ footer{border-top:.5px solid rgba(255,255,255,.04);padding:34px 0;}
 
   <div class="cmp rv" style="transition-delay:.15s">
     <div class="cmp-head bad">Abordagem comum</div>
-    <div class="cmp-head good">Abordagem BOSS OS</div>
-    <div class="ci bad">Vende ferramenta, não sistema</div>
-    <div class="ci good">Projeta sistema antes de qualquer ferramenta</div>
+    <div class="cmp-head good">Abordagem DBB OS</div>
+    <div class="ci bad">Vende ferramenta, não automação real</div>
+    <div class="ci good">Automatiza o processo ponta a ponta</div>
     <div class="ci bad">Automação sobre processo quebrado</div>
-    <div class="ci good">Processo primeiro, automação depois</div>
+    <div class="ci good">Processo enxuto primeiro, automação depois</div>
     <div class="ci bad">Entrega e desaparece</div>
-    <div class="ci good">Operação assistida até estabilizar</div>
+    <div class="ci good">Acompanha até o protocolo estabilizar</div>
     <div class="ci bad">Nenhum indicador de retorno</div>
     <div class="ci good">Dashboard de impacto mensurável</div>
   </div>
@@ -670,9 +670,9 @@ footer{border-top:.5px solid rgba(255,255,255,.04);padding:34px 0;}
   <div class="form-wrap">
     <div class="form-head rv">
       <span class="eye">Diagnóstico Operacional Gratuito</span>
-      <h2>Descubra onde sua operação<br><strong>está sangrando.</strong></h2>
+      <h2>Descubra quais processos<br><strong>já poderiam estar automatizados.</strong></h2>
       <div class="gold-rule" style="opacity:.2;margin:18px auto;max-width:200px;"></div>
-      <p>30 minutos. Identificamos os gargalos invisíveis que destroem sua margem — sem pitch, sem proposta. Só diagnóstico.</p>
+      <p>30 minutos. Mapeamos as tarefas manuais que mais consomem tempo e margem da sua operação — sem pitch, sem proposta. Só diagnóstico.</p>
     </div>
 
     <div class="fbox rv" style="transition-delay:.12s">
@@ -704,10 +704,10 @@ footer{border-top:.5px solid rgba(255,255,255,.04);padding:34px 0;}
             <label class="ilabel">Qual é seu principal objetivo ou ambição agora?</label>
             <select name="entry.1427730301" required>
               <option value="" disabled selected>Selecione o maior gargalo atual</option>
-              <option value="Processos lentos">Processos lentos</option>
+              <option value="Processos manuais demais">Processos manuais demais</option>
+              <option value="Falta de automação">Falta de automação</option>
               <option value="Perda de clientes">Perda de clientes</option>
-              <option value="Falta de organização">Falta de organização</option>
-              <option value="Excesso de tarefas manuais">Excesso de tarefas manuais</option>
+              <option value="Falta de organização/dados">Falta de organização/dados</option>
               <option value="Equipe sobrecarregada">Equipe sobrecarregada</option>
               <option value="Custos operacionais altos">Custos operacionais altos</option>
             </select>
@@ -733,9 +733,9 @@ footer{border-top:.5px solid rgba(255,255,255,.04);padding:34px 0;}
 <footer>
 <div class="w">
   <div class="ft">
-    <span class="ft-logo">Boss Curiosidades</span>
-    <span class="ft-copy">© 2026 — Estruturas Inteligentes para Negócios Modernos</span>
-    <a href="https://instagram.com/boss.curiosidades" target="_blank" class="ft-ig">@boss.curiosidades</a>
+    <span class="ft-logo">DBB Soluções Empresariais</span>
+    <span class="ft-copy">© 2026 — Automação & IA para Negócios Modernos</span>
+    <a href="https://instagram.com/dbb.sol" target="_blank" class="ft-ig">@dbb.sol</a>
   </div>
 </div>
 </footer>
